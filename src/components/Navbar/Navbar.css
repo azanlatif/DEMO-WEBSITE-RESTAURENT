@@ -1,0 +1,430 @@
+/* ============================================================
+ *  NAVBAR STYLES
+ *  Sticky, dark transparent navbar matching the Tastyc design.
+ *  Features: hover dropdowns, mobile hamburger, cart badge.
+ * ============================================================ */
+
+/* ── Base Navbar ─────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  transition: background-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+/* Transparent over hero */
+.navbar--transparent {
+  background-color: transparent;
+}
+
+/* Solid after scrolling */
+.navbar--solid {
+  background-color: rgba(15, 21, 24, 0.97);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.navbar__container {
+  max-width: var(--container-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Logo ────────────────────────────────────────────────── */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  z-index: 1001;
+}
+
+.navbar__logo img {
+  height: 40px;
+  width: auto;
+}
+
+.navbar__logo-accent {
+  color: var(--color-primary);
+}
+
+/* ── Desktop Nav Links ───────────────────────────────────── */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.navbar__item {
+  position: relative;
+}
+
+.navbar__link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 18px;
+  color: var(--color-white);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color var(--transition-fast);
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+}
+
+.navbar__link:hover,
+.navbar__link:focus-visible {
+  color: var(--color-primary);
+}
+
+/* Active link orange underline */
+.navbar__link--active {
+  color: var(--color-primary);
+}
+
+.navbar__link--active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 18px;
+  right: 18px;
+  height: 2px;
+  background-color: var(--color-primary);
+}
+
+/* Dropdown chevron */
+.navbar__chevron {
+  font-size: 0.65rem;
+  transition: transform var(--transition-fast);
+  margin-left: 2px;
+}
+
+.navbar__item:hover .navbar__chevron,
+.navbar__item:focus-within .navbar__chevron {
+  transform: rotate(180deg);
+}
+
+/* ── Dropdown Panel ──────────────────────────────────────── */
+.navbar__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background-color: var(--color-primary);
+  padding: 20px 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--transition-base);
+  z-index: 1002;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Show on hover AND focus-within (keyboard accessible) */
+.navbar__item:hover .navbar__dropdown,
+.navbar__item:focus-within .navbar__dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.navbar__dropdown-link {
+  display: block;
+  padding: 12px 32px;
+  color: var(--color-white);
+  font-size: 0.95rem;
+  font-weight: 400;
+  transition: background-color var(--transition-fast), padding-left var(--transition-fast);
+}
+
+.navbar__dropdown-link:hover,
+.navbar__dropdown-link:focus-visible {
+  background-color: rgba(255, 255, 255, 0.15);
+  padding-left: 40px;
+}
+
+/* Orange top accent line on dropdown */
+.navbar__dropdown::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0));
+}
+
+/* ── Right Side (Reservation + Cart) ─────────────────────── */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar__reservation-btn {
+  padding: 10px 24px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.navbar__reservation-btn:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(240, 102, 45, 0.4);
+}
+
+/* ── Cart Icon ───────────────────────────────────────────── */
+.navbar__cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  color: var(--color-white);
+  transition: color var(--transition-fast);
+}
+
+.navbar__cart:hover {
+  color: var(--color-primary);
+}
+
+.navbar__cart-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.navbar__cart-badge {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 0.65rem;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ── Hamburger ───────────────────────────────────────────── */
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  z-index: 1001;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.navbar__hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-white);
+  transition: all var(--transition-base);
+  border-radius: 1px;
+}
+
+.navbar__hamburger--open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar__hamburger--open span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar__hamburger--open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ── Mobile Nav Overlay ──────────────────────────────────── */
+.navbar__mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 320px;
+  max-width: 85vw;
+  height: 100vh;
+  background-color: var(--color-dark);
+  padding: calc(var(--nav-height) + 20px) 24px 40px;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  transition: right var(--transition-base);
+  z-index: 999;
+  box-shadow: -4px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.navbar__mobile-menu--open {
+  right: 0;
+}
+
+/* Backdrop when mobile menu is open */
+.navbar__backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.navbar__backdrop--visible {
+  opacity: 1;
+}
+
+/* ── Mobile Link Styles ──────────────────────────────────── */
+.navbar__mobile-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.navbar__mobile-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  color: var(--color-white);
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: none;
+  border: none;
+  width: 100%;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.navbar__mobile-link:hover {
+  color: var(--color-primary);
+}
+
+.navbar__mobile-link--active {
+  color: var(--color-primary);
+}
+
+.navbar__mobile-chevron {
+  font-size: 0.7rem;
+  transition: transform var(--transition-fast);
+}
+
+.navbar__mobile-chevron--open {
+  transform: rotate(180deg);
+}
+
+/* Expandable sub-links in mobile */
+.navbar__mobile-subnav {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-base);
+  background-color: rgba(240, 102, 45, 0.1);
+  border-radius: 4px;
+}
+
+.navbar__mobile-subnav--open {
+  max-height: 500px;
+}
+
+.navbar__mobile-sublink {
+  display: block;
+  padding: 12px 24px;
+  color: var(--color-text-light);
+  font-size: 0.9rem;
+  transition: color var(--transition-fast), padding-left var(--transition-fast);
+}
+
+.navbar__mobile-sublink:hover {
+  color: var(--color-primary);
+  padding-left: 32px;
+}
+
+/* Mobile reservation button */
+.navbar__mobile-reservation {
+  margin-top: 24px;
+  padding: 14px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+  font-family: var(--font-body);
+}
+
+.navbar__mobile-reservation:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__reservation-btn {
+    display: none;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  .navbar__mobile-menu {
+    display: flex;
+  }
+
+  .navbar__backdrop {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar__logo {
+    font-size: 1.4rem;
+  }
+}

@@ -1,0 +1,1170 @@
+/* ============================================================
+ *  HOME PAGE STYLES
+ *  Matches the Tastyc design PDF section-by-section.
+ * ============================================================ */
+
+/* ── 1. HERO SECTION ─────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 650px;
+  overflow: hidden;
+}
+
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 0;
+}
+
+.hero__slide--active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  transition: transform 6s ease;
+}
+
+.hero__slide--active .hero__bg {
+  transform: scale(1);
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 21, 24, 0.55) 0%,
+    rgba(15, 21, 24, 0.65) 50%,
+    rgba(15, 21, 24, 0.75) 100%
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero__subtitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.hero__subtitle::before,
+.hero__subtitle::after {
+  content: "";
+  width: 40px;
+  height: 1px;
+  background: var(--color-primary);
+}
+
+.hero__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 600;
+  color: var(--color-white);
+  line-height: 1.1;
+  margin-bottom: 20px;
+  white-space: pre-line;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.3);
+}
+
+.hero__description {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 500px;
+  margin-bottom: 36px;
+  line-height: 1.7;
+}
+
+.hero__cta {
+  padding: 16px 40px;
+  border: 2px solid var(--color-white);
+  background: transparent;
+  color: var(--color-white);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-family: var(--font-body);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.hero__cta:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(240, 102, 45, 0.4);
+}
+
+/* Hero Navigation */
+.hero__nav {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero__dots {
+  display: flex;
+  gap: 10px;
+}
+
+.hero__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  padding: 0;
+}
+
+.hero__dot--active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.hero__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-size: 1rem;
+}
+
+.hero__arrow:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* ── 2. WELCOME / ABOUT SECTION ──────────────────────────── */
+.welcome {
+  padding: 120px 0;
+  background: var(--color-white);
+}
+
+.welcome__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.welcome__content {
+  padding-right: 20px;
+}
+
+.welcome__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.welcome__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--color-dark);
+  line-height: 1.2;
+  margin-bottom: 24px;
+  white-space: pre-line;
+}
+
+.welcome__text {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.welcome__features {
+  margin-bottom: 32px;
+}
+
+.welcome__feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 0.9rem;
+  color: var(--color-dark);
+}
+
+.welcome__feature-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.welcome__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.welcome__cta:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(240, 102, 45, 0.4);
+}
+
+.welcome__image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome__image {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.welcome__image-accent {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 120px;
+  height: 120px;
+  border: 3px solid var(--color-primary);
+  border-radius: 4px;
+  z-index: -1;
+}
+
+/* ── 3. FRESH INGREDIENTS SECTION ────────────────────────── */
+.fresh {
+  padding: 120px 0;
+  background: var(--color-off-white);
+}
+
+.fresh__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.fresh__image-group {
+  position: relative;
+}
+
+.fresh__image-main {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.fresh__image-chef {
+  position: absolute;
+  bottom: -30px;
+  right: -20px;
+  width: 200px;
+  height: 250px;
+  object-fit: cover;
+  border: 6px solid var(--color-off-white);
+  border-radius: 4px;
+  box-shadow: var(--shadow-lg);
+}
+
+.fresh__content {
+  padding-left: 20px;
+}
+
+.fresh__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.fresh__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--color-dark);
+  line-height: 1.2;
+  margin-bottom: 24px;
+  white-space: pre-line;
+}
+
+.fresh__text {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.fresh__stats {
+  display: flex;
+  gap: 40px;
+}
+
+.fresh__stat {
+  text-align: center;
+}
+
+.fresh__stat-value {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.fresh__stat-label {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ── 4. CHEF'S RECIPES SECTION ───────────────────────────── */
+.recipes {
+  position: relative;
+  padding: 120px 0;
+  background: var(--color-white);
+  overflow: hidden;
+}
+
+.recipes__grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.recipes__image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.recipes__image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.recipes__image-wrapper:hover .recipes__image {
+  transform: scale(1.03);
+}
+
+.recipes__play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-base);
+  box-shadow: 0 4px 30px rgba(240, 102, 45, 0.5);
+}
+
+.recipes__play-btn:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.recipes__play-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-white);
+  margin-left: 4px;
+}
+
+.recipes__content {
+  padding-left: 20px;
+}
+
+.recipes__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.recipes__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--color-dark);
+  line-height: 1.2;
+  margin-bottom: 24px;
+  white-space: pre-line;
+}
+
+.recipes__text {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.recipes__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  border: 2px solid var(--color-dark);
+  background: transparent;
+  color: var(--color-dark);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.recipes__cta:hover {
+  background: var(--color-dark);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+/* ── 5. WHY CHOOSE US ────────────────────────────────────── */
+.why-us {
+  padding: 120px 0;
+  background: var(--color-off-white);
+  text-align: center;
+}
+
+.why-us__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 12px;
+}
+
+.why-us__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.why-us__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 60px;
+}
+
+.why-us__card {
+  background: var(--color-white);
+  padding: 48px 32px;
+  text-align: center;
+  border-radius: 4px;
+  transition: all var(--transition-base);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.why-us__card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+}
+
+.why-us__icon-wrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(240, 102, 45, 0.1), rgba(240, 102, 45, 0.05));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.why-us__icon {
+  width: 36px;
+  height: 36px;
+  color: var(--color-primary);
+}
+
+.why-us__card-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 12px;
+}
+
+.why-us__card-text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* ── 6. WORKING HOURS SECTION ────────────────────────────── */
+.hours {
+  position: relative;
+  padding: 120px 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  text-align: center;
+}
+
+.hours__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 21, 24, 0.88);
+}
+
+.hours__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.hours__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.hours__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--color-white);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+}
+
+.hours__table {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.hours__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.15);
+}
+
+.hours__day {
+  font-size: 0.95rem;
+  color: var(--color-white);
+  font-weight: 400;
+}
+
+.hours__time {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+}
+
+.hours__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 40px;
+  padding: 14px 36px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.hours__cta:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(240, 102, 45, 0.4);
+}
+
+/* ── 7. TESTIMONIALS ─────────────────────────────────────── */
+.testimonials {
+  padding: 120px 0;
+  background: var(--color-white);
+}
+
+.testimonials__label {
+  display: block;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.testimonials__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--color-dark);
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.testimonial-card {
+  background: var(--color-off-white);
+  padding: 40px 32px;
+  border-radius: 4px;
+  text-align: center;
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Big quote mark */
+.testimonial-card::before {
+  content: """;
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--color-primary);
+  opacity: 0.2;
+}
+
+.testimonial-card__avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 16px;
+  border: 3px solid var(--color-primary);
+}
+
+.testimonial-card__stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.testimonial-card__star {
+  width: 16px;
+  height: 16px;
+  color: var(--color-primary);
+}
+
+.testimonial-card__text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.testimonial-card__name {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 4px;
+}
+
+.testimonial-card__role {
+  font-size: 0.8rem;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ── 8. STATS / COUNTERS ─────────────────────────────────── */
+.stats {
+  padding: 80px 0;
+  background: var(--color-off-white);
+  border-top: 1px solid var(--color-border-dark);
+  border-bottom: 1px solid var(--color-border-dark);
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+.stats__item {
+  padding: 20px;
+}
+
+.stats__value {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: var(--color-dark);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stats__value span {
+  color: var(--color-primary);
+}
+
+.stats__label {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ── 9. DOWNLOAD APP SECTION ─────────────────────────────── */
+.download {
+  position: relative;
+  padding: 120px 0;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.download__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(15, 21, 24, 0.92), rgba(240, 102, 45, 0.15));
+}
+
+.download__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.download__content {
+  color: var(--color-white);
+}
+
+.download__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.download__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin-bottom: 24px;
+  white-space: pre-line;
+}
+
+.download__text {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.download__buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.download__store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  color: var(--color-white);
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.download__store-btn:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.download__store-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.download__store-text small {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.download__store-text strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.download__phone-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.download__phone {
+  max-width: 280px;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* ── 10. BLOG / TIPS SECTION ─────────────────────────────── */
+.blog {
+  padding: 120px 0;
+  background: var(--color-white);
+}
+
+.blog__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 50px;
+}
+
+.blog__header-left {
+  max-width: 500px;
+}
+
+.blog__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.blog__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 600;
+  color: var(--color-dark);
+  line-height: 1.2;
+  white-space: pre-line;
+}
+
+.blog__view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  border: 2px solid var(--color-dark);
+  color: var(--color-dark);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.blog__view-all:hover {
+  background: var(--color-dark);
+  color: var(--color-white);
+}
+
+.blog__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.blog-card {
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--color-off-white);
+  transition: all var(--transition-base);
+}
+
+.blog-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+}
+
+.blog-card__image-wrapper {
+  overflow: hidden;
+  height: 240px;
+}
+
+.blog-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.blog-card:hover .blog-card__image {
+  transform: scale(1.08);
+}
+
+.blog-card__body {
+  padding: 28px 24px;
+}
+
+.blog-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.blog-card__category {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.blog-card__date {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.blog-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  line-height: 1.3;
+  margin-bottom: 12px;
+  white-space: pre-line;
+}
+
+.blog-card__excerpt {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.blog-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: gap var(--transition-fast);
+}
+
+.blog-card__link:hover {
+  gap: 12px;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .welcome__grid,
+  .fresh__grid,
+  .recipes__grid,
+  .download__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .fresh__image-chef {
+    width: 160px;
+    height: 200px;
+    bottom: -20px;
+    right: 0;
+  }
+
+  .why-us__grid,
+  .testimonials__grid,
+  .blog__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .blog__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero__heading {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+
+  .hero__nav {
+    bottom: 24px;
+  }
+
+  .welcome,
+  .fresh,
+  .recipes,
+  .why-us,
+  .testimonials,
+  .blog {
+    padding: 80px 0;
+  }
+
+  .hours {
+    padding: 80px 0;
+    background-attachment: scroll;
+  }
+
+  .download {
+    padding: 80px 0;
+  }
+
+  .stats {
+    padding: 60px 0;
+  }
+
+  .why-us__grid,
+  .testimonials__grid,
+  .blog__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .download__phone {
+    max-width: 220px;
+  }
+
+  .recipes__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recipes__image-wrapper {
+    order: -1;
+  }
+
+  .fresh__content,
+  .recipes__content {
+    padding-left: 0;
+  }
+
+  .welcome__content {
+    padding-right: 0;
+  }
+
+  .welcome__image {
+    height: 350px;
+  }
+
+  .fresh__image-main {
+    height: 350px;
+  }
+}
+
+@media (max-width: 480px) {
+  .download__buttons {
+    flex-direction: column;
+  }
+
+  .stats__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}

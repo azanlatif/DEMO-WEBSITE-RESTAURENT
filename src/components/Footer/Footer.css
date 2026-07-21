@@ -1,0 +1,280 @@
+/* ============================================================
+ *  FOOTER STYLES
+ *  Dark footer matching the Tastyc design.
+ *  Sections: Logo+socials, About, Contact, Gallery strip,
+ *  Dotted divider, Copyright + Back-to-top.
+ * ============================================================ */
+
+.footer {
+  background-color: var(--color-dark);
+  color: var(--color-text-light);
+  padding: 80px 0 0;
+}
+
+/* ── Top Grid ────────────────────────────────────────────── */
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+}
+
+/* ── Column: Brand ───────────────────────────────────────── */
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer__logo {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: 1px;
+}
+
+.footer__logo-accent {
+  color: var(--color-primary);
+}
+
+.footer__socials {
+  display: flex;
+  gap: 12px;
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: var(--color-white);
+  font-size: 0.85rem;
+  transition: all var(--transition-base);
+}
+
+.footer__social-link:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-3px);
+}
+
+.footer__social-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Column: About ───────────────────────────────────────── */
+.footer__about {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer__column-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+
+.footer__about-text {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--color-text-muted);
+}
+
+.footer__read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: gap var(--transition-fast), color var(--transition-fast);
+}
+
+.footer__read-more:hover {
+  gap: 12px;
+  color: var(--color-white);
+}
+
+/* ── Column: Contact ─────────────────────────────────────── */
+.footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer__contact-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.footer__contact-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--color-primary);
+  margin-top: 2px;
+}
+
+.footer__contact-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.footer__contact-value {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  transition: color var(--transition-fast);
+}
+
+.footer__contact-value:hover {
+  color: var(--color-primary);
+}
+
+/* ── Gallery Strip ───────────────────────────────────────── */
+.footer__gallery-section {
+  padding: 40px 0;
+  border-top: 1px dotted rgba(255, 255, 255, 0.15);
+}
+
+.footer__gallery-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.footer__gallery-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.footer__gallery-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.footer__gallery-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-white);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  background: none;
+  font-family: var(--font-body);
+}
+
+.footer__gallery-arrow:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.footer__gallery-strip {
+  display: flex;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.footer__gallery-img {
+  width: calc((100% - 56px) / 8); /* 8 images with gaps */
+  min-width: 80px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform var(--transition-base), opacity var(--transition-base);
+  flex-shrink: 0;
+}
+
+.footer__gallery-img:hover {
+  transform: scale(1.05);
+  opacity: 0.85;
+}
+
+/* ── Bottom Bar ──────────────────────────────────────────── */
+.footer__bottom {
+  border-top: 1px dotted rgba(255, 255, 255, 0.15);
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__copyright {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.footer__back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+}
+
+.footer__back-to-top:hover {
+  color: var(--color-primary);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    padding: 60px 0 0;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .footer__gallery-img {
+    width: calc((100% - 24px) / 4);
+    min-width: 60px;
+  }
+
+  .footer__bottom {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+}
