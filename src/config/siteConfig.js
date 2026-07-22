@@ -87,8 +87,11 @@ const siteConfig = {
   /* ── Contact Info ──────────────────────────────────────── */
   contact: {
     phone: "+1 (555) 123-4567",
+    phoneAlt: "+1 (555) 789-0123",
     email: "hello@tastyc.com",
+    emailAlt: "reservation@tastyc.com",
     address: "1234 Gourmet Avenue, New York, NY 10001",
+    addressShort: "Canada, Toronto, North Avenue 6 Rd.",
     mapUrl: "https://maps.google.com/?q=1234+Gourmet+Avenue+New+York",
   },
 
