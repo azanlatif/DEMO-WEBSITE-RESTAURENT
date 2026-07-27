@@ -56,8 +56,10 @@ const siteConfig = {
 
   /* ── Contact Info ──────────────────────────────────────── */
   contact: {
-    phone: "+1 (555) 123-4567",
+    phone: "+92 316 0011900",
     phoneAlt: "+1 (555) 789-0123",
+    whatsapp: "+92 316 0011900",
+    whatsappNumber: "923160011900",
     email: "hello@tastyc.com",
     emailAlt: "reservation@tastyc.com",
     address: "1234 Gourmet Avenue, New York, NY 10001",

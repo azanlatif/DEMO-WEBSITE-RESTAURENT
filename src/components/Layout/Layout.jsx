@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import Newsletter from "../Newsletter/Newsletter";
 import Footer from "../Footer/Footer";
+import CartModal from "../CartModal/CartModal";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -27,6 +28,7 @@ export default function Layout() {
       </main>
       <Newsletter />
       <Footer />
+      <CartModal />
     </>
   );
 }

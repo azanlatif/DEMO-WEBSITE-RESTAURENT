@@ -22,6 +22,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import siteConfig from "../../config/siteConfig";
 import homeData from "../../data/homeData";
+import { openWhatsApp } from "../../utils/whatsapp";
 import "./Home.css";
 
 /* ─────────────────────────────────────────────────────────── */
@@ -347,9 +348,13 @@ export default function Home() {
             ))}
           </div>
 
-          <Link to="/contact" className="hours__cta">
+          <button
+            onClick={() => openWhatsApp(`Hello! I would like to book a table reservation at ${siteConfig.name}.`)}
+            className="hours__cta"
+            style={{ border: "none", cursor: "pointer" }}
+          >
             BOOK A TABLE
-          </Link>
+          </button>
         </div>
       </section>
 

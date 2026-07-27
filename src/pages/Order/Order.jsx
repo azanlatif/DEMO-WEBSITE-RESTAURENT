@@ -9,6 +9,8 @@ import siteConfig from "../../config/siteConfig";
 import menuData from "../../data/menuData";
 import "./Order.css";
 
+import { openWhatsApp } from "../../utils/whatsapp";
+
 const STEP_ICONS = {
   document: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -53,6 +55,24 @@ export default function Order() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
+
+    let text = `🛒 *NEW ONLINE ORDER*\n`;
+    text += `-------------------------------\n`;
+    text += `*Name:* ${formData.name}\n`;
+    text += `*Email:* ${formData.email}\n`;
+    text += `*Phone:* ${formData.phone}\n`;
+    text += `*Order Type:* ${formData.orderType.toUpperCase()}\n`;
+    if (formData.orderType === "delivery" && formData.address) {
+      text += `*Delivery Address:* ${formData.address}\n`;
+    }
+    text += `*Date:* ${formData.date} | *Time:* ${formData.time}\n`;
+    text += `-------------------------------\n`;
+    text += `*Items Ordered:* \n${formData.items}\n`;
+    if (formData.notes) {
+      text += `*Special Notes:* ${formData.notes}\n`;
+    }
+
+    openWhatsApp(text);
     setTimeout(() => setSubmitted(false), 4000);
   };
 

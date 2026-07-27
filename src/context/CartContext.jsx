@@ -1,7 +1,6 @@
 /**
  * ============================================================
- *  CART CONTEXT — Frontend-only cart state (no backend).
- *  Provides addToCart, removeFromCart, clearCart, and cartCount.
+ *  CART CONTEXT — Frontend cart state + Cart Modal toggle.
  * ============================================================
  */
 import { createContext, useContext, useState, useCallback, useMemo } from "react";
@@ -10,9 +9,14 @@ const CartContext = createContext(null);
 
 export function CartProvider({ children }) {
   const [items, setItems] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
-  /** Add an item (or increment qty if already in cart) */
-  const addToCart = useCallback((product) => {
+  const openCart = useCallback(() => setIsCartOpen(true), []);
+  const closeCart = useCallback(() => setIsCartOpen(false), []);
+  const toggleCart = useCallback(() => setIsCartOpen((prev) => !prev), []);
+
+  /** Add an item (or increment qty if already in cart) and auto-open cart drawer */
+  const addToCart = useCallback((product, autoOpen = true) => {
     setItems((prev) => {
       const idx = prev.findIndex((i) => i.id === product.id);
       if (idx !== -1) {
@@ -22,6 +26,9 @@ export function CartProvider({ children }) {
       }
       return [...prev, { ...product, qty: 1 }];
     });
+    if (autoOpen) {
+      setIsCartOpen(true);
+    }
   }, []);
 
   /** Remove one unit; if qty hits 0 remove the item entirely */
@@ -33,6 +40,11 @@ export function CartProvider({ children }) {
     );
   }, []);
 
+  /** Completely remove item by ID regardless of quantity */
+  const deleteItem = useCallback((productId) => {
+    setItems((prev) => prev.filter((i) => i.id !== productId));
+  }, []);
+
   /** Clear entire cart */
   const clearCart = useCallback(() => setItems([]), []);
 
@@ -42,15 +54,32 @@ export function CartProvider({ children }) {
     [items]
   );
 
+  /** Total price of items */
+  const cartTotal = useMemo(
+    () => items.reduce((sum, i) => sum + i.price * i.qty, 0),
+    [items]
+  );
+
   const value = useMemo(
-    () => ({ items, addToCart, removeFromCart, clearCart, cartCount }),
-    [items, addToCart, removeFromCart, clearCart, cartCount]
+    () => ({
+      items,
+      addToCart,
+      removeFromCart,
+      deleteItem,
+      clearCart,
+      cartCount,
+      cartTotal,
+      isCartOpen,
+      openCart,
+      closeCart,
+      toggleCart,
+    }),
+    [items, addToCart, removeFromCart, deleteItem, clearCart, cartCount, cartTotal, isCartOpen, openCart, closeCart, toggleCart]
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
-/** Custom hook for consuming cart context */
 export function useCart() {
   const ctx = useContext(CartContext);
   if (!ctx) throw new Error("useCart must be used within a <CartProvider>");

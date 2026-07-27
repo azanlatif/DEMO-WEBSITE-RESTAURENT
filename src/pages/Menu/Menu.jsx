@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import siteConfig from "../../config/siteConfig";
 import menuData from "../../data/menuData";
 import { useCart } from "../../context/CartContext";
+import { openWhatsApp } from "../../utils/whatsapp";
 import "./Menu.css";
 
 const CATEGORIES = ["All", ...menuData.map((c) => c.category)];
@@ -117,9 +118,13 @@ export default function Menu() {
             <h2 className="menu-cta__heading">{menu.cta.heading}</h2>
             <p className="menu-cta__text">{menu.cta.text}</p>
             <div className="menu-cta__buttons">
-              <Link to={menu.cta.primaryBtnLink} className="menu-cta__btn menu-cta__btn--primary">
+              <button
+                onClick={() => openWhatsApp(`Hello! I would like to book a table reservation at ${siteConfig.name}.`)}
+                className="menu-cta__btn menu-cta__btn--primary"
+                style={{ border: "none", cursor: "pointer" }}
+              >
                 {menu.cta.primaryBtnText}
-              </Link>
+              </button>
               <Link to={menu.cta.secondaryBtnLink} className="menu-cta__btn menu-cta__btn--outline">
                 {menu.cta.secondaryBtnText}
               </Link>

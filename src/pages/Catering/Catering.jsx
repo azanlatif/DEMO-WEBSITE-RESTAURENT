@@ -8,6 +8,8 @@ import { useState } from "react";
 import siteConfig from "../../config/siteConfig";
 import "./Catering.css";
 
+import { openWhatsApp } from "../../utils/whatsapp";
+
 export default function Catering() {
   const { catering } = siteConfig.pages;
   const [formData, setFormData] = useState({
@@ -30,6 +32,19 @@ export default function Catering() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
+
+    let text = `🎉 *CATERING REQUEST*\n`;
+    text += `-------------------------------\n`;
+    text += `*Name:* ${formData.name}\n`;
+    text += `*Email:* ${formData.email}\n`;
+    text += `*Phone:* ${formData.phone}\n`;
+    text += `*Event Type:* ${formData.eventType}\n`;
+    text += `*Guests:* ${formData.guests}\n`;
+    text += `*Date:* ${formData.date} | *Time:* ${formData.time}\n`;
+    if (formData.venue) text += `*Venue:* ${formData.venue}\n`;
+    if (formData.message) text += `*Details/Message:* ${formData.message}\n`;
+
+    openWhatsApp(text);
     setTimeout(() => setSubmitted(false), 4000);
   };
 

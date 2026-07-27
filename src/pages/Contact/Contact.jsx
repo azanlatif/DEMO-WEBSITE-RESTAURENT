@@ -13,6 +13,7 @@
 import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import siteConfig from "../../config/siteConfig";
+import { openWhatsApp } from "../../utils/whatsapp";
 import "./Contact.css";
 
 /** Simple email regex */
@@ -65,6 +66,15 @@ export default function Contact() {
       }
 
       setSubmitted(true);
+
+      let text = `📩 *NEW CONTACT MESSAGE*\n`;
+      text += `-------------------------------\n`;
+      text += `*Name:* ${form.firstName} ${form.lastName}\n`;
+      text += `*Email:* ${form.email}\n`;
+      if (form.phone) text += `*Phone:* ${form.phone}\n`;
+      text += `*Message:* ${form.message}\n`;
+
+      openWhatsApp(text);
       setForm({ firstName: "", lastName: "", phone: "", email: "", message: "" });
     },
     [form]

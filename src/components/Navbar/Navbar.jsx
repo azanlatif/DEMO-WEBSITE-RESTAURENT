@@ -3,26 +3,27 @@
  *  NAVBAR COMPONENT
  *  Sticky, dark navbar with:
  *  - Logo from siteConfig
- *  - Desktop links with orange hover dropdowns
- *  - Keyboard-accessible dropdowns (focus-within)
- *  - Reservation button + cart icon with badge
- *  - Mobile hamburger → slide-in menu with expandable sections
+ *  - Desktop links
+ *  - Reservation button (opens WhatsApp)
+ *  - Cart button with badge (opens Cart Drawer)
+ *  - Mobile hamburger slide-in menu
  * ============================================================
  */
 import { useState, useEffect, useCallback } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import siteConfig from "../../config/siteConfig";
 import { useCart } from "../../context/CartContext";
+import { openWhatsApp } from "../../utils/whatsapp";
 import "./Navbar.css";
 
 export default function Navbar() {
-  const { cartCount } = useCart();
+  const { cartCount, openCart } = useCart();
   const location = useLocation();
 
   /* ── State ──────────────────────────────────────────────── */
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [expandedMobile, setExpandedMobile] = useState(null); // which mobile section is open
+  const [expandedMobile, setExpandedMobile] = useState(null);
 
   /* ── Scroll listener for transparent→solid transition ──── */
   useEffect(() => {
@@ -53,6 +54,11 @@ export default function Navbar() {
   const isActive = (path) => {
     if (path === "/") return location.pathname === "/";
     return location.pathname.startsWith(path);
+  };
+
+  const handleReservationClick = (e) => {
+    e.preventDefault();
+    openWhatsApp(`Hello! I would like to book a table reservation at ${siteConfig.name}.`);
   };
 
   return (
@@ -122,12 +128,17 @@ export default function Navbar() {
 
           {/* ── Actions (Reservation + Cart + Hamburger) ── */}
           <div className="navbar__actions">
-            <Link to="/contact" className="navbar__reservation-btn">
+            <button onClick={handleReservationClick} className="navbar__reservation-btn">
               Reservation
-            </Link>
+            </button>
 
-            {/* Cart icon */}
-            <Link to="/shop" className="navbar__cart" aria-label={`Cart: ${cartCount} items`}>
+            {/* Cart icon (Opens Cart Drawer) */}
+            <button
+              onClick={openCart}
+              className="navbar__cart"
+              aria-label={`Cart: ${cartCount} items`}
+              style={{ background: "none", border: "none", cursor: "pointer" }}
+            >
               <svg className="navbar__cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="9" cy="21" r="1" />
                 <circle cx="20" cy="21" r="1" />
@@ -136,7 +147,7 @@ export default function Navbar() {
               {cartCount > 0 && (
                 <span className="navbar__cart-badge">{cartCount}</span>
               )}
-            </Link>
+            </button>
 
             {/* Hamburger toggle (mobile only) */}
             <button
@@ -209,9 +220,9 @@ export default function Navbar() {
           </div>
         ))}
 
-        <Link to="/contact" className="navbar__mobile-reservation">
+        <button onClick={handleReservationClick} className="navbar__mobile-reservation">
           Reservation
-        </Link>
+        </button>
       </div>
     </>
   );
