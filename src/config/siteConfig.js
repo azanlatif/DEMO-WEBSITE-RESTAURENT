@@ -59,15 +59,7 @@ const siteConfig = {
       ],
     },
     { label: "Contact", path: "/contact" },
-    {
-      label: "Shop",
-      path: "/shop",
-      children: [
-        { label: "All Products", path: "/shop" },
-        { label: "Best Sellers", path: "/shop#bestsellers" },
-        { label: "New Arrivals", path: "/shop#new" },
-      ],
-    },
+    { label: "Shop", path: "/shop" },
     { label: "About Us", path: "/about" },
   ],
 
