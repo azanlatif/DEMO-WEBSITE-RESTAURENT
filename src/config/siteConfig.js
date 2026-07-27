@@ -39,20 +39,6 @@ const siteConfig = {
   navLinks: [
     { label: "Home", path: "/" },
     {
-      label: "Pages",
-      path: "/about",
-      children: [
-        { label: "About Us", path: "/about" },
-        { label: "Gallery", path: "/about#gallery" },
-        { label: "History", path: "/about#history" },
-        { label: "Features", path: "/about#features" },
-        { label: "Pricing", path: "/about#pricing" },
-        { label: "Our Chefs", path: "/about#chefs" },
-        { label: "FAQ", path: "/about#faq" },
-        { label: "Testimonials", path: "/about#testimonials" },
-      ],
-    },
-    {
       label: "Menu",
       path: "/menu",
       children: [
@@ -82,6 +68,7 @@ const siteConfig = {
         { label: "New Arrivals", path: "/shop#new" },
       ],
     },
+    { label: "About Us", path: "/about" },
   ],
 
   /* ── Contact Info ──────────────────────────────────────── */
