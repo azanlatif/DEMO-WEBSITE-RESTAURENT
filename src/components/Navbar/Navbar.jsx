@@ -33,10 +33,12 @@ export default function Navbar() {
   }, []);
 
   /* ── Close mobile menu on route change ─────────────────── */
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(location.pathname);
+  if (prevPathname !== location.pathname) {
+    setPrevPathname(location.pathname);
     setMobileOpen(false);
     setExpandedMobile(null);
-  }, [location.pathname]);
+  }
 
   /* ── Lock body scroll when mobile menu is open ─────────── */
   useEffect(() => {

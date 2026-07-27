@@ -31,11 +31,10 @@ export default function Menu() {
     return cat ? cat.items.map((item) => ({ ...item, category: cat.category })) : [];
   }, [activeTab]);
 
-  /* ── Special proposals (pick 3 random items) ──────────── */
+  /* ── Special proposals (pick 3 featured items) ─────────── */
   const specialItems = useMemo(() => {
     const all = menuData.flatMap((c) => c.items);
-    const shuffled = [...all].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 3);
+    return [all[1], all[4], all[7]].filter(Boolean);
   }, []);
 
   return (

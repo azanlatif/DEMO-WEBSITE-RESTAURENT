@@ -6,10 +6,8 @@
  */
 import { useState } from "react";
 import siteConfig from "../../config/siteConfig";
-import menuData from "../../data/menuData";
-import "./Order.css";
-
 import { openWhatsApp } from "../../utils/whatsapp";
+import "./Order.css";
 
 const STEP_ICONS = {
   document: (

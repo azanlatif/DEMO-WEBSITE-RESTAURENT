@@ -698,7 +698,7 @@
 
 /* Big quote mark */
 .testimonial-card::before {
-  content: """;
+  content: "”";
   position: absolute;
   top: 16px;
   left: 24px;
