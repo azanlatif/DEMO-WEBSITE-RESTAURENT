@@ -1,0 +1,632 @@
+/* ============================================================
+ *  MENU PAGE STYLES
+ *  Hero, filter tabs, dish grid, CTA, specials, working hours.
+ * ============================================================ */
+
+/* ── Hero Banner ───────────────────────────────────────────── */
+.menu-hero {
+  position: relative;
+  height: 45vh;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&h=600&fit=crop")
+    center / cover no-repeat;
+  overflow: hidden;
+}
+
+.menu-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 21, 24, 0.6) 0%,
+    rgba(15, 21, 24, 0.78) 100%
+  );
+}
+
+.menu-hero__inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.menu-hero__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 12px;
+}
+
+.menu-hero__label::before,
+.menu-hero__label::after {
+  content: "";
+  width: 40px;
+  height: 1px;
+  background: var(--color-primary);
+}
+
+.menu-hero__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 600;
+  color: var(--color-white);
+  margin: 0;
+  letter-spacing: 6px;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+}
+
+.menu-hero__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.menu-hero__dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  opacity: 0.6;
+}
+
+.menu-hero__dots span:first-child {
+  opacity: 1;
+}
+
+/* ── Category Filter Tabs ──────────────────────────────────── */
+.menu-tabs {
+  padding: 40px 0 0;
+  background: var(--color-white);
+}
+
+.menu-tabs__bar {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  border-bottom: 2px solid #eee;
+  flex-wrap: wrap;
+}
+
+.menu-tabs__btn {
+  padding: 14px 28px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #777;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: -2px;
+}
+
+.menu-tabs__btn:hover {
+  color: var(--color-primary);
+}
+
+.menu-tabs__btn--active {
+  color: var(--color-white);
+  background: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+  border-radius: 4px 4px 0 0;
+}
+
+/* ── All Dishes Section ────────────────────────────────────── */
+.menu-dishes {
+  padding: 60px 0 80px;
+  background: var(--color-white);
+}
+
+.menu-dishes__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.menu-dishes__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.menu-dishes__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 12px;
+}
+
+.menu-dishes__subtext {
+  font-size: 0.9rem;
+  color: #999;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── Dish Card (horizontal layout like reference) ──────────── */
+.menu-dishes__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.dish-card {
+  display: flex;
+  gap: 20px;
+  background: var(--color-white);
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 16px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.dish-card:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.dish-card__image-wrapper {
+  flex-shrink: 0;
+  width: 120px;
+  height: 100px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.dish-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.dish-card:hover .dish-card__image {
+  transform: scale(1.08);
+}
+
+.dish-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.dish-card__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.dish-card__name {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dish-card__price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.dish-card__desc {
+  font-size: 0.82rem;
+  color: #888;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Reservation CTA Banner ────────────────────────────────── */
+.menu-cta {
+  position: relative;
+  padding: 80px 0;
+  background:
+    url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1400&h=500&fit=crop")
+    center / cover no-repeat;
+}
+
+.menu-cta__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 21, 24, 0.88) 0%,
+    rgba(15, 21, 24, 0.65) 100%
+  );
+}
+
+.menu-cta__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.menu-cta__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.2;
+  margin-bottom: 16px;
+  white-space: pre-line;
+}
+
+.menu-cta__text {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  max-width: 420px;
+}
+
+.menu-cta__buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.menu-cta__btn {
+  padding: 14px 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.menu-cta__btn--primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.menu-cta__btn--primary:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+
+.menu-cta__btn--outline {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--color-white);
+  background: transparent;
+}
+
+.menu-cta__btn--outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-cta__image-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.menu-cta__image {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+.menu-cta__image-label {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 8px 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-dark);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 3px;
+}
+
+/* ── Special Proposals ─────────────────────────────────────── */
+.menu-specials {
+  padding: 80px 0;
+  background: var(--color-off-white, #F5F3F0);
+  text-align: center;
+}
+
+.menu-specials__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.menu-specials__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 12px;
+}
+
+.menu-specials__subtext {
+  font-size: 0.9rem;
+  color: #999;
+  max-width: 480px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+
+.menu-specials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  text-align: left;
+}
+
+/* ── Special Card ──────────────────────────────────────────── */
+.special-card {
+  background: var(--color-white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.special-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.special-card__image-wrapper {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.special-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.special-card:hover .special-card__image {
+  transform: scale(1.06);
+}
+
+.special-card__body {
+  padding: 20px;
+}
+
+.special-card__name {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 8px;
+}
+
+.special-card__desc {
+  font-size: 0.82rem;
+  color: #888;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.special-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.special-card__price {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.special-card__cart-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.special-card__cart-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+.special-card__cart-btn:hover {
+  background: var(--color-primary-hover);
+  transform: scale(1.08);
+}
+
+/* ── Working Hours ─────────────────────────────────────────── */
+.menu-hours {
+  position: relative;
+  padding: 80px 0;
+  background:
+    url("https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1400&h=500&fit=crop")
+    center / cover no-repeat;
+}
+
+.menu-hours__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 21, 24, 0.85);
+}
+
+.menu-hours__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.menu-hours__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.menu-hours__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: 4px;
+  margin-bottom: 16px;
+}
+
+.menu-hours__text {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.7;
+}
+
+.menu-hours__table {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 28px 32px;
+}
+
+.menu-hours__row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.menu-hours__row:last-child {
+  border-bottom: none;
+}
+
+.menu-hours__day {
+  font-size: 0.9rem;
+  color: var(--color-white);
+  font-weight: 500;
+}
+
+.menu-hours__time {
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .menu-specials__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-hero {
+    height: 35vh;
+    min-height: 260px;
+  }
+
+  .menu-tabs__btn {
+    padding: 10px 18px;
+    font-size: 0.75rem;
+  }
+
+  .menu-dishes__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .dish-card {
+    flex-direction: column;
+  }
+
+  .dish-card__image-wrapper {
+    width: 100%;
+    height: 180px;
+  }
+
+  .menu-cta__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .menu-cta__image-wrapper {
+    order: -1;
+  }
+
+  .menu-specials__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-hours__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .menu-dishes {
+    padding: 40px 0 60px;
+  }
+
+  .menu-cta {
+    padding: 50px 0;
+  }
+
+  .menu-specials {
+    padding: 50px 0;
+  }
+
+  .menu-hours {
+    padding: 50px 0;
+  }
+}

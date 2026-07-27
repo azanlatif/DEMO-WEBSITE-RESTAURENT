@@ -38,17 +38,7 @@ const siteConfig = {
   /* ── Navigation Links ──────────────────────────────────── */
   navLinks: [
     { label: "Home", path: "/" },
-    {
-      label: "Menu",
-      path: "/menu",
-      children: [
-        { label: "Breakfast", path: "/menu#breakfast" },
-        { label: "Lunch", path: "/menu#lunch" },
-        { label: "Dinner", path: "/menu#dinner" },
-        { label: "Desserts", path: "/menu#desserts" },
-        { label: "Drinks", path: "/menu#drinks" },
-      ],
-    },
+    { label: "Menu", path: "/menu" },
     {
       label: "Order",
       path: "/order",
