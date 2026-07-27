@@ -2,6 +2,7 @@
  * ============================================================
  *  MENU PAGE — Full menu with hero, category filter tabs,
  *  dish cards, reservation CTA, and special proposals.
+ *  All content from config/siteConfig.js & data/menuData.js
  * ============================================================
  */
 import { useState, useMemo } from "react";
@@ -16,6 +17,7 @@ const CATEGORIES = ["All", ...menuData.map((c) => c.category)];
 export default function Menu() {
   const { addToCart } = useCart();
   const [activeTab, setActiveTab] = useState("All");
+  const { menu } = siteConfig.pages;
 
   /* ── Filtered items ───────────────────────────────────── */
   const filteredItems = useMemo(() => {
@@ -38,11 +40,14 @@ export default function Menu() {
   return (
     <>
       {/* ── Hero Banner ──────────────────────────────────── */}
-      <section className="menu-hero">
+      <section
+        className="menu-hero"
+        style={{ backgroundImage: `url(${menu.hero.backgroundImage})` }}
+      >
         <div className="menu-hero__overlay" />
         <div className="container menu-hero__inner">
-          <span className="menu-hero__label">Our Menu</span>
-          <h1 className="menu-hero__heading">MENU TABS</h1>
+          <span className="menu-hero__label">{menu.hero.label}</span>
+          <h1 className="menu-hero__heading">{menu.hero.heading}</h1>
           <div className="menu-hero__dots" aria-hidden="true">
             <span /><span /><span />
           </div>
@@ -70,13 +75,11 @@ export default function Menu() {
       <section className="menu-dishes">
         <div className="container">
           <div className="menu-dishes__header">
-            <span className="menu-dishes__label">Our Dishes</span>
+            <span className="menu-dishes__label">{menu.dishes.label}</span>
             <h2 className="menu-dishes__heading">
-              {activeTab === "All" ? "All Dishes" : activeTab}
+              {activeTab === "All" ? menu.dishes.headingAll : activeTab}
             </h2>
-            <p className="menu-dishes__subtext">
-              Explore our delicious selection crafted with the freshest ingredients by our talented chefs.
-            </p>
+            <p className="menu-dishes__subtext">{menu.dishes.subtext}</p>
           </div>
 
           <div className="menu-dishes__grid">
@@ -104,33 +107,32 @@ export default function Menu() {
       </section>
 
       {/* ── Reservation CTA Banner ───────────────────────── */}
-      <section className="menu-cta">
+      <section
+        className="menu-cta"
+        style={{ backgroundImage: `url(${menu.cta.backgroundImage})` }}
+      >
         <div className="menu-cta__overlay" />
         <div className="container menu-cta__inner">
           <div className="menu-cta__content">
-            <h2 className="menu-cta__heading">
-              THIS EVENING{"\n"}WILL BE GREAT!
-            </h2>
-            <p className="menu-cta__text">
-              Reserve your table today and enjoy an unforgettable dining experience with family and friends.
-            </p>
+            <h2 className="menu-cta__heading">{menu.cta.heading}</h2>
+            <p className="menu-cta__text">{menu.cta.text}</p>
             <div className="menu-cta__buttons">
-              <Link to="/contact" className="menu-cta__btn menu-cta__btn--primary">
-                Reservation
+              <Link to={menu.cta.primaryBtnLink} className="menu-cta__btn menu-cta__btn--primary">
+                {menu.cta.primaryBtnText}
               </Link>
-              <Link to="/order" className="menu-cta__btn menu-cta__btn--outline">
-                Learn More
+              <Link to={menu.cta.secondaryBtnLink} className="menu-cta__btn menu-cta__btn--outline">
+                {menu.cta.secondaryBtnText}
               </Link>
             </div>
           </div>
           <div className="menu-cta__image-wrapper">
             <img
-              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&h=350&fit=crop"
-              alt="Reserved table"
+              src={menu.cta.reservedImage}
+              alt={menu.cta.reservedImageAlt}
               className="menu-cta__image"
               loading="lazy"
             />
-            <span className="menu-cta__image-label">RESERVED</span>
+            <span className="menu-cta__image-label">{menu.cta.reservedLabel}</span>
           </div>
         </div>
       </section>
@@ -138,11 +140,9 @@ export default function Menu() {
       {/* ── Special Proposals ────────────────────────────── */}
       <section className="menu-specials">
         <div className="container">
-          <span className="menu-specials__label">Chef's Pick</span>
-          <h2 className="menu-specials__heading">Special Proposals Menu</h2>
-          <p className="menu-specials__subtext">
-            Handpicked dishes from our chef — the best of what we offer this season.
-          </p>
+          <span className="menu-specials__label">{menu.specials.label}</span>
+          <h2 className="menu-specials__heading">{menu.specials.heading}</h2>
+          <p className="menu-specials__subtext">{menu.specials.subtext}</p>
 
           <div className="menu-specials__grid">
             {specialItems.map((item) => (
@@ -178,15 +178,16 @@ export default function Menu() {
       </section>
 
       {/* ── Working Hours ────────────────────────────────── */}
-      <section className="menu-hours">
+      <section
+        className="menu-hours"
+        style={{ backgroundImage: `url(${menu.hours.backgroundImage})` }}
+      >
         <div className="menu-hours__overlay" />
         <div className="container menu-hours__inner">
           <div className="menu-hours__left">
-            <span className="menu-hours__label">Reservation</span>
-            <h2 className="menu-hours__heading">WORKING HOURS</h2>
-            <p className="menu-hours__text">
-              Visit us during our opening hours and enjoy a warm, welcoming atmosphere.
-            </p>
+            <span className="menu-hours__label">{menu.hours.label}</span>
+            <h2 className="menu-hours__heading">{menu.hours.heading}</h2>
+            <p className="menu-hours__text">{menu.hours.text}</p>
           </div>
           <div className="menu-hours__table">
             {siteConfig.workingHours.map((row, i) => (

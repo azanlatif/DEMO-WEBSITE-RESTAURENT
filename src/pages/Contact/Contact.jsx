@@ -7,7 +7,7 @@
  *  2. Contact Information (3 cards: Write Us, Call Us, Visit Us)
  *  3. Contact Form (First/Last Name, Phone, Email, Message)
  *
- *  All data from siteConfig.js — frontend-only form validation.
+ *  All data from siteConfig.js
  * ============================================================
  */
 import { useState, useCallback } from "react";
@@ -20,6 +20,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function Contact() {
   const { contact } = siteConfig;
+  const { contact: contactPage } = siteConfig.pages;
 
   /* ── Form state ────────────────────────────────────────── */
   const [form, setForm] = useState({
@@ -36,7 +37,6 @@ export default function Contact() {
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    // Clear error on that field as user types
     setErrors((prev) => {
       if (prev[name]) {
         const next = { ...prev };
@@ -47,7 +47,7 @@ export default function Contact() {
     });
   }, []);
 
-  /** Validate & "submit" (frontend-only) */
+  /** Validate & submit */
   const handleSubmit = useCallback(
     (e) => {
       e.preventDefault();
@@ -64,7 +64,6 @@ export default function Contact() {
         return;
       }
 
-      // Frontend-only: show success
       setSubmitted(true);
       setForm({ firstName: "", lastName: "", phone: "", email: "", message: "" });
     },
@@ -77,18 +76,17 @@ export default function Contact() {
       {/* 1. HERO BANNER                                     */}
       {/* ═══════════════════════════════════════════════════ */}
       <section className="contact-banner">
-        {/* Dark map-style background */}
         <div
           className="contact-banner__bg"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1920&h=600&fit=crop&q=30')`,
+            backgroundImage: `url('${contactPage.hero.backgroundImage}')`,
             filter: "saturate(0) brightness(0.25)",
           }}
         />
         <div className="contact-banner__overlay" />
 
         <div className="container contact-banner__content">
-          <h1 className="contact-banner__heading">Contact</h1>
+          <h1 className="contact-banner__heading">{contactPage.hero.heading}</h1>
           <div className="contact-banner__breadcrumb">
             <Link to="/">Home</Link>
             <span className="contact-banner__breadcrumb-sep">/</span>
@@ -103,11 +101,9 @@ export default function Contact() {
       <section className="contact-info" id="contact-info">
         <div className="container">
           <span className="contact-info__accent" aria-hidden="true" />
-          <span className="contact-info__label">GET IN TOUCH</span>
-          <h2 className="contact-info__heading">Contact Information</h2>
-          <p className="contact-info__subtext">
-            We're always eager to hear from you. Reach out by any of the methods below and we'll get back to you as soon as possible.
-          </p>
+          <span className="contact-info__label">{contactPage.info.label}</span>
+          <h2 className="contact-info__heading">{contactPage.info.heading}</h2>
+          <p className="contact-info__subtext">{contactPage.info.subtext}</p>
 
           <div className="contact-cards">
             {/* Write Us */}
@@ -181,19 +177,16 @@ export default function Contact() {
       <section className="contact-form-section" id="contact-form">
         <div className="container">
           <hr className="contact-form-section__divider" />
-          <span className="contact-form-section__label">CONTACT FORM</span>
-          <h2 className="contact-form-section__heading">Write Us a Message</h2>
-          <p className="contact-form-section__subtext">
-            Have a question or a special request? Fill out the form below and we'll get back to you shortly.
-          </p>
+          <span className="contact-form-section__label">{contactPage.form.label}</span>
+          <h2 className="contact-form-section__heading">{contactPage.form.heading}</h2>
+          <p className="contact-form-section__subtext">{contactPage.form.subtext}</p>
 
           {submitted ? (
             <div className="contact-form__success">
-              ✅ Thank you for your message! We'll get back to you within 24 hours.
+              {contactPage.form.successMessage}
             </div>
           ) : (
             <form className="contact-form" onSubmit={handleSubmit} noValidate>
-              {/* Row 1: First Name + Last Name */}
               <div className="contact-form__row">
                 <div className="contact-form__group">
                   <input
@@ -227,7 +220,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Row 2: Phone + Email */}
               <div className="contact-form__row">
                 <div className="contact-form__group">
                   <input
@@ -258,7 +250,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Row 3: Message */}
               <div className="contact-form__group contact-form__group--full">
                 <textarea
                   name="message"
@@ -276,7 +267,7 @@ export default function Contact() {
 
               <div className="contact-form__submit-wrapper">
                 <button type="submit" className="contact-form__submit">
-                  SEND A MESSAGE
+                  {contactPage.form.submitText}
                 </button>
               </div>
             </form>

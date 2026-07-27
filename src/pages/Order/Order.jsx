@@ -1,7 +1,7 @@
 /**
  * ============================================================
  *  ORDER ONLINE PAGE — Place an order for pickup or delivery.
- *  Hero + order form + how it works + contact info cards.
+ *  All content from config/siteConfig.js
  * ============================================================
  */
 import { useState } from "react";
@@ -9,7 +9,30 @@ import siteConfig from "../../config/siteConfig";
 import menuData from "../../data/menuData";
 import "./Order.css";
 
+const STEP_ICONS = {
+  document: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="16" y1="13" x2="8" y2="13" />
+      <line x1="16" y1="17" x2="8" y2="17" />
+    </svg>
+  ),
+  clock: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
+    </svg>
+  ),
+  check: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  ),
+};
+
 export default function Order() {
+  const { order } = siteConfig.pages;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,19 +56,17 @@ export default function Order() {
     setTimeout(() => setSubmitted(false), 4000);
   };
 
-  /* Flatten menu items for the select dropdown */
-  const allItems = menuData.flatMap((cat) =>
-    cat.items.map((item) => `${item.name} — €${item.price.toFixed(2)}`)
-  );
-
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="order-hero">
+      <section
+        className="order-hero"
+        style={{ backgroundImage: `url(${order.hero.backgroundImage})` }}
+      >
         <div className="order-hero__overlay" />
         <div className="container order-hero__inner">
-          <span className="order-hero__label">Online Ordering</span>
-          <h1 className="order-hero__heading">ORDER ONLINE</h1>
+          <span className="order-hero__label">{order.hero.label}</span>
+          <h1 className="order-hero__heading">{order.hero.heading}</h1>
         </div>
       </section>
 
@@ -53,11 +74,9 @@ export default function Order() {
       <section className="order-form-section">
         <div className="container">
           <div className="order-form-section__header">
-            <span className="order-form-section__label">Place Your Order</span>
-            <h2 className="order-form-section__heading">Order for Pickup or Delivery</h2>
-            <p className="order-form-section__subtext">
-              Fill out the form below and we'll prepare your order fresh. Choose pickup or delivery to your door.
-            </p>
+            <span className="order-form-section__label">{order.form.label}</span>
+            <h2 className="order-form-section__heading">{order.form.heading}</h2>
+            <p className="order-form-section__subtext">{order.form.subtext}</p>
           </div>
 
           <form className="order-form" onSubmit={handleSubmit}>
@@ -149,14 +168,12 @@ export default function Order() {
 
             <div className="order-form__submit-row">
               <button type="submit" className="order-form__btn" disabled={submitted}>
-                {submitted ? "Order Placed! ✓" : "Place Order"}
+                {submitted ? order.form.successText : order.form.submitText}
               </button>
             </div>
 
             {submitted && (
-              <p className="order-form__success">
-                Thank you! Your order has been received. We'll confirm it shortly via phone or email.
-              </p>
+              <p className="order-form__success">{order.form.successMessage}</p>
             )}
           </form>
         </div>
@@ -165,48 +182,18 @@ export default function Order() {
       {/* ── How It Works ─────────────────────────────────── */}
       <section className="order-steps">
         <div className="container">
-          <span className="order-steps__label">Simple & Quick</span>
-          <h2 className="order-steps__heading">How It Works</h2>
+          <span className="order-steps__label">{order.steps.label}</span>
+          <h2 className="order-steps__heading">{order.steps.heading}</h2>
           <div className="order-steps__grid">
-            <div className="order-steps__card">
-              <div className="order-steps__icon-wrap">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                  <polyline points="14 2 14 8 20 8" />
-                  <line x1="16" y1="13" x2="8" y2="13" />
-                  <line x1="16" y1="17" x2="8" y2="17" />
-                </svg>
+            {order.steps.items.map((step, i) => (
+              <div key={i} className="order-steps__card">
+                <div className="order-steps__icon-wrap">
+                  {STEP_ICONS[step.icon]}
+                </div>
+                <h3 className="order-steps__card-title">{step.title}</h3>
+                <p className="order-steps__card-text">{step.text}</p>
               </div>
-              <h3 className="order-steps__card-title">Choose Your Dishes</h3>
-              <p className="order-steps__card-text">
-                Browse our menu and tell us what you'd like in the order form.
-              </p>
-            </div>
-
-            <div className="order-steps__card">
-              <div className="order-steps__icon-wrap">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <polyline points="12 6 12 12 16 14" />
-                </svg>
-              </div>
-              <h3 className="order-steps__card-title">Pick a Time</h3>
-              <p className="order-steps__card-text">
-                Select your preferred date and time for pickup or delivery.
-              </p>
-            </div>
-
-            <div className="order-steps__card">
-              <div className="order-steps__icon-wrap">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-              </div>
-              <h3 className="order-steps__card-title">Enjoy Your Meal</h3>
-              <p className="order-steps__card-text">
-                We'll confirm your order and have it freshly prepared for you.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>

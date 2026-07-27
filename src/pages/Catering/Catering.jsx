@@ -1,23 +1,15 @@
 /**
  * ============================================================
  *  CATERING PAGE — Book catering services for events.
- *  Hero + catering form + services cards + testimonial.
+ *  All content from config/siteConfig.js
  * ============================================================
  */
 import { useState } from "react";
 import siteConfig from "../../config/siteConfig";
 import "./Catering.css";
 
-const EVENT_TYPES = [
-  "Corporate Event",
-  "Wedding Reception",
-  "Birthday Party",
-  "Private Dinner",
-  "Holiday Gathering",
-  "Other",
-];
-
 export default function Catering() {
+  const { catering } = siteConfig.pages;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -44,11 +36,14 @@ export default function Catering() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="catering-hero">
+      <section
+        className="catering-hero"
+        style={{ backgroundImage: `url(${catering.hero.backgroundImage})` }}
+      >
         <div className="catering-hero__overlay" />
         <div className="container catering-hero__inner">
-          <span className="catering-hero__label">Events & Celebrations</span>
-          <h1 className="catering-hero__heading">CATERING</h1>
+          <span className="catering-hero__label">{catering.hero.label}</span>
+          <h1 className="catering-hero__heading">{catering.hero.heading}</h1>
         </div>
       </section>
 
@@ -56,12 +51,9 @@ export default function Catering() {
       <section className="catering-form-section">
         <div className="container">
           <div className="catering-form-section__header">
-            <span className="catering-form-section__label">Catering Services</span>
-            <h2 className="catering-form-section__heading">Let Us Cater Your Event</h2>
-            <p className="catering-form-section__subtext">
-              From intimate dinners to grand celebrations, our team crafts bespoke menus
-              tailored to your occasion. Fill out the form and we'll get back to you within 24 hours.
-            </p>
+            <span className="catering-form-section__label">{catering.form.label}</span>
+            <h2 className="catering-form-section__heading">{catering.form.heading}</h2>
+            <p className="catering-form-section__subtext">{catering.form.subtext}</p>
           </div>
 
           <form className="catering-form" onSubmit={handleSubmit}>
@@ -101,7 +93,7 @@ export default function Catering() {
                 required
               >
                 <option value="" disabled>Event Type</option>
-                {EVENT_TYPES.map((type) => (
+                {catering.form.eventTypes.map((type) => (
                   <option key={type} value={type}>{type}</option>
                 ))}
               </select>
@@ -155,14 +147,12 @@ export default function Catering() {
 
             <div className="catering-form__submit-row">
               <button type="submit" className="catering-form__btn" disabled={submitted}>
-                {submitted ? "Request Sent! ✓" : "Request a Quote"}
+                {submitted ? catering.form.successText : catering.form.submitText}
               </button>
             </div>
 
             {submitted && (
-              <p className="catering-form__success">
-                Thank you! We've received your catering request and will contact you within 24 hours.
-              </p>
+              <p className="catering-form__success">{catering.form.successMessage}</p>
             )}
           </form>
         </div>
@@ -171,50 +161,22 @@ export default function Catering() {
       {/* ── What We Offer ────────────────────────────────── */}
       <section className="catering-services">
         <div className="container">
-          <span className="catering-services__label">Our Offerings</span>
-          <h2 className="catering-services__heading">What We Provide</h2>
+          <span className="catering-services__label">{catering.services.label}</span>
+          <h2 className="catering-services__heading">{catering.services.heading}</h2>
           <div className="catering-services__grid">
-            <div className="catering-services__card">
-              <div className="catering-services__img-wrap">
-                <img
-                  src="https://images.unsplash.com/photo-1555244162-803834f70033?w=400&h=300&fit=crop"
-                  alt="Custom menus"
-                  loading="lazy"
-                />
+            {catering.services.items.map((item, i) => (
+              <div key={i} className="catering-services__card">
+                <div className="catering-services__img-wrap">
+                  <img
+                    src={item.image}
+                    alt={item.imageAlt}
+                    loading="lazy"
+                  />
+                </div>
+                <h3 className="catering-services__card-title">{item.title}</h3>
+                <p className="catering-services__card-text">{item.text}</p>
               </div>
-              <h3 className="catering-services__card-title">Custom Menus</h3>
-              <p className="catering-services__card-text">
-                Personalised menus designed around your preferences, dietary needs, and event theme.
-              </p>
-            </div>
-
-            <div className="catering-services__card">
-              <div className="catering-services__img-wrap">
-                <img
-                  src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=300&fit=crop"
-                  alt="Full service"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="catering-services__card-title">Full Service</h3>
-              <p className="catering-services__card-text">
-                Professional staff, tableware, setup, and cleanup — we handle everything.
-              </p>
-            </div>
-
-            <div className="catering-services__card">
-              <div className="catering-services__img-wrap">
-                <img
-                  src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop"
-                  alt="Any occasion"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="catering-services__card-title">Any Occasion</h3>
-              <p className="catering-services__card-text">
-                Weddings, corporate events, birthdays, or private dinners — no event is too big or small.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>

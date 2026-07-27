@@ -1,7 +1,7 @@
 /**
  * ============================================================
  *  SHOP PAGE — Full shop with hero, sidebar, and product grid.
- *  Categories: Deals & Discounts (matching navbar dropdown).
+ *  All content from config/siteConfig.js & data/productsData.js
  * ============================================================
  */
 import { useState, useMemo } from "react";
@@ -12,16 +12,11 @@ import { useCart } from "../../context/CartContext";
 import "./Shop.css";
 
 const CATEGORIES = ["All", "Deals", "Discounts"];
-const SORT_OPTIONS = [
-  { value: "default", label: "Default sorting" },
-  { value: "price-asc", label: "Price: Low to High" },
-  { value: "price-desc", label: "Price: High to Low" },
-  { value: "name-asc", label: "Name: A–Z" },
-];
 
 export default function Shop() {
   const { addToCart } = useCart();
   const location = useLocation();
+  const { shop } = siteConfig.pages;
 
   /* ── Derive initial category from URL hash ────────────── */
   const hashCategory = location.hash.replace("#", "");
@@ -40,12 +35,10 @@ export default function Shop() {
   const filteredProducts = useMemo(() => {
     let items = [...productsData];
 
-    // Category filter
     if (activeCategory !== "All") {
       items = items.filter((p) => p.category === activeCategory);
     }
 
-    // Search filter
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       items = items.filter(
@@ -55,7 +48,6 @@ export default function Shop() {
       );
     }
 
-    // Sort
     switch (sortBy) {
       case "price-asc":
         items.sort((a, b) => a.price - b.price);
@@ -84,20 +76,20 @@ export default function Shop() {
     return counts;
   }, []);
 
-  /* ── Featured products for sidebar ────────────────────── */
   const featuredProducts = productsData.slice(0, 3);
 
   return (
     <>
       {/* ── Hero Banner ──────────────────────────────────── */}
-      <section className="shop-hero">
+      <section
+        className="shop-hero"
+        style={{ backgroundImage: `url(${shop.hero.backgroundImage})` }}
+      >
         <div className="shop-hero__overlay" />
         <div className="container shop-hero__inner">
-          <span className="shop-hero__label">Online Store</span>
-          <h1 className="shop-hero__heading">SHOP</h1>
-          <p className="shop-hero__text">
-            Discover exclusive deals and discounts on our finest dishes
-          </p>
+          <span className="shop-hero__label">{shop.hero.label}</span>
+          <h1 className="shop-hero__heading">{shop.hero.heading}</h1>
+          <p className="shop-hero__text">{shop.hero.text}</p>
         </div>
       </section>
 
@@ -107,7 +99,6 @@ export default function Shop() {
           <div className="shop__layout">
             {/* ── Sidebar ──────────────────────────────── */}
             <aside className="shop__sidebar">
-              {/* Search */}
               <div className="shop__sidebar-block">
                 <div className="shop__search">
                   <input
@@ -124,7 +115,6 @@ export default function Shop() {
                 </div>
               </div>
 
-              {/* Categories */}
               <div className="shop__sidebar-block">
                 <h3 className="shop__sidebar-title">CATEGORIES</h3>
                 <ul className="shop__category-list">
@@ -142,7 +132,6 @@ export default function Shop() {
                 </ul>
               </div>
 
-              {/* Featured Products */}
               <div className="shop__sidebar-block">
                 <h3 className="shop__sidebar-title">PRODUCTS</h3>
                 <div className="shop__featured-list">
@@ -161,11 +150,10 @@ export default function Shop() {
                 </div>
               </div>
 
-              {/* Tags */}
               <div className="shop__sidebar-block">
                 <h3 className="shop__sidebar-title">TAGS</h3>
                 <div className="shop__tags">
-                  {["Deals", "Discounts", "Seafood", "Fish", "Fresh", "Special"].map((tag) => (
+                  {shop.tags.map((tag) => (
                     <span key={tag} className="shop__tag">{tag}</span>
                   ))}
                 </div>
@@ -174,12 +162,11 @@ export default function Shop() {
 
             {/* ── Product Grid ─────────────────────────── */}
             <div className="shop__main">
-              {/* Toolbar */}
               <div className="shop__toolbar">
                 <div className="shop__toolbar-left">
-                  <h2 className="shop__toolbar-title">SHOP</h2>
+                  <h2 className="shop__toolbar-title">{shop.toolbar.title}</h2>
                   <span className="shop__toolbar-count">
-                    Showing all {filteredProducts.length} results
+                    {shop.toolbar.showingText.replace("{count}", filteredProducts.length)}
                   </span>
                 </div>
                 <select
@@ -187,7 +174,7 @@ export default function Shop() {
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
                 >
-                  {SORT_OPTIONS.map((opt) => (
+                  {shop.sortOptions.map((opt) => (
                     <option key={opt.value} value={opt.value}>
                       {opt.label}
                     </option>
@@ -195,7 +182,6 @@ export default function Shop() {
                 </select>
               </div>
 
-              {/* Grid */}
               <div className="shop__grid" id="deals">
                 {filteredProducts.map((product) => (
                   <div key={product.id} className="product-card">
@@ -240,7 +226,7 @@ export default function Shop() {
 
               {filteredProducts.length === 0 && (
                 <div className="shop__empty">
-                  <p>No products found. Try a different search or category.</p>
+                  <p>{shop.emptyMessage}</p>
                 </div>
               )}
             </div>
