@@ -1,7 +1,7 @@
 /**
  * ============================================================
  *  APP — Root component with React Router.
- *  Routes: / (Home), /menu, /order, /contact, /shop, /about
+ *  Routes: / (Home), /menu, /order, /catering, /contact, /shop, /about
  *  All pages wrapped in Layout (Navbar + Newsletter + Footer).
  * ============================================================
  */
@@ -14,6 +14,7 @@ import Order from "./pages/Order/Order";
 import Contact from "./pages/Contact/Contact";
 import Shop from "./pages/Shop/Shop";
 import About from "./pages/About/About";
+import Catering from "./pages/Catering/Catering";
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/order" element={<Order />} />
+            <Route path="/catering" element={<Catering />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/about" element={<About />} />

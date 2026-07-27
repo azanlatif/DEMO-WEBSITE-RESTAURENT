@@ -1,0 +1,372 @@
+/* ============================================================
+ *  ORDER ONLINE PAGE STYLES
+ *  Hero, form, how-it-works steps, contact cards.
+ * ============================================================ */
+
+/* ── Hero Banner ───────────────────────────────────────────── */
+.order-hero {
+  position: relative;
+  height: 45vh;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    url("https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&h=600&fit=crop")
+    center / cover no-repeat;
+  overflow: hidden;
+}
+
+.order-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 21, 24, 0.6) 0%,
+    rgba(15, 21, 24, 0.78) 100%
+  );
+}
+
+.order-hero__inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.order-hero__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 12px;
+}
+
+.order-hero__label::before,
+.order-hero__label::after {
+  content: "";
+  width: 40px;
+  height: 1px;
+  background: var(--color-primary);
+}
+
+.order-hero__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 600;
+  color: var(--color-white);
+  margin: 0;
+  letter-spacing: 6px;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Order Form Section ────────────────────────────────────── */
+.order-form-section {
+  padding: 80px 0;
+  background: var(--color-white);
+}
+
+.order-form-section__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.order-form-section__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.order-form-section__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 12px;
+}
+
+.order-form-section__subtext {
+  font-size: 0.9rem;
+  color: #999;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── Form ──────────────────────────────────────────────────── */
+.order-form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.order-form__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.order-form__input,
+.order-form__select {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  color: var(--color-dark);
+  background: var(--color-white);
+  transition: border-color 0.3s ease;
+}
+
+.order-form__input::placeholder {
+  color: #aaa;
+}
+
+.order-form__input:focus,
+.order-form__select:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.order-form__select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+.order-form__full {
+  margin-bottom: 16px;
+}
+
+.order-form__textarea {
+  width: 100%;
+  padding: 14px 18px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  color: var(--color-dark);
+  resize: vertical;
+  margin-bottom: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.order-form__textarea::placeholder {
+  color: #aaa;
+}
+
+.order-form__textarea:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.order-form__textarea--small {
+  min-height: 60px;
+}
+
+.order-form__submit-row {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.order-form__btn {
+  padding: 16px 48px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-white);
+  background: var(--color-primary);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.order-form__btn:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+
+.order-form__btn:disabled {
+  background: #4caf50;
+  cursor: default;
+}
+
+.order-form__success {
+  text-align: center;
+  margin-top: 20px;
+  color: #4caf50;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* ── How It Works ──────────────────────────────────────────── */
+.order-steps {
+  padding: 80px 0;
+  background: var(--color-off-white, #F5F3F0);
+  text-align: center;
+}
+
+.order-steps__label {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.order-steps__heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 48px;
+}
+
+.order-steps__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+}
+
+.order-steps__card {
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: 40px 28px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.order-steps__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.order-steps__icon-wrap {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+}
+
+.order-steps__icon-wrap svg {
+  width: 28px;
+  height: 28px;
+  color: var(--color-primary);
+}
+
+.order-steps__card-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 10px;
+}
+
+.order-steps__card-text {
+  font-size: 0.85rem;
+  color: #888;
+  line-height: 1.7;
+}
+
+/* ── Contact Info Cards ────────────────────────────────────── */
+.order-contact {
+  padding: 80px 0;
+  background: var(--color-white);
+}
+
+.order-contact__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  text-align: center;
+}
+
+.order-contact__card {
+  padding: 40px 24px;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease;
+}
+
+.order-contact__card:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+
+.order-contact__icon-wrap {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+}
+
+.order-contact__icon-wrap svg {
+  width: 26px;
+  height: 26px;
+  color: var(--color-primary);
+}
+
+.order-contact__title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-dark);
+  margin-bottom: 10px;
+}
+
+.order-contact__detail {
+  font-size: 0.85rem;
+  color: #777;
+  line-height: 1.6;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .order-hero {
+    height: 35vh;
+    min-height: 260px;
+  }
+
+  .order-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .order-steps__grid,
+  .order-contact__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .order-form-section,
+  .order-steps,
+  .order-contact {
+    padding: 50px 0;
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+  .order-form__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -44,8 +44,7 @@ const siteConfig = {
       path: "/order",
       children: [
         { label: "Order Online", path: "/order" },
-        { label: "Catering", path: "/order#catering" },
-        { label: "Gift Cards", path: "/order#gift-cards" },
+        { label: "Catering", path: "/catering" },
       ],
     },
     { label: "Contact", path: "/contact" },
