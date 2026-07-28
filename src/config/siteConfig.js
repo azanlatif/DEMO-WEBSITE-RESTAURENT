@@ -10,15 +10,15 @@
 
 const siteConfig = {
   /* ── Brand ─────────────────────────────────────────────── */
-  name: "Tastyc",
-  tagline: "Delicious Food, Unforgettable Experience",
+  name: "HN Foods",
+  tagline: "Authentic Pakistani Taste in Islamabad",
   description:
-    "We invite you to visit our restaurant and enjoy exquisite cuisine crafted by world-class chefs using the freshest ingredients.",
+    "HN Foods brings authentic Pakistani, BBQ, and desi flavors to F-6 Markaz, Islamabad, with a comfortable family-friendly dining experience and a wide menu of breakfast, karahi, handi, seafood, rice, and grill specialties.",
 
   /* ── Logo (import or URL) ──────────────────────────────── */
   // Use a text-based logo by default; replace with an image path if desired.
   logo: null, // e.g. "/images/logo.png"
-  logoAlt: "Tastyc Restaurant Logo",
+  logoAlt: "HN Foods Restaurant Logo",
 
   /* ── Design Tokens (mirrored in CSS variables) ─────────── */
   colors: {
@@ -56,47 +56,47 @@ const siteConfig = {
 
   /* ── Contact Info ──────────────────────────────────────── */
   contact: {
-    phone: "+92 316 0011900",
-    phoneAlt: "+1 (555) 789-0123",
-    whatsapp: "+92 316 0011900",
-    whatsappNumber: "923160011900",
-    email: "hello@tastyc.com",
-    emailAlt: "reservation@tastyc.com",
-    address: "1234 Gourmet Avenue, New York, NY 10001",
-    addressShort: "Canada, Toronto, North Avenue 6 Rd.",
-    mapUrl: "https://maps.google.com/?q=1234+Gourmet+Avenue+New+York",
+    phone: "",
+    phoneAlt: "",
+    whatsapp: "",
+    whatsappNumber: "",
+    email: "",
+    emailAlt: "",
+    address: "F6 Markaz, Plot 19, Agha Khan Rd (behind Kaspas Desserts), Sector F-6, Islamabad.",
+    addressShort: "F-6, Islamabad",
+    mapUrl: "https://maps.google.com/?q=F6+Markaz,+Plot+19,+Agha+Khan+Rd+(behind+Kaspas+Desserts),+Sector+F-6,+Islamabad",
   },
 
   /* ── Working Hours ─────────────────────────────────────── */
   workingHours: [
-    { day: "Monday", hours: "09:00 AM – 10:00 PM" },
-    { day: "Tuesday", hours: "09:00 AM – 10:00 PM" },
-    { day: "Wednesday", hours: "09:00 AM – 10:00 PM" },
-    { day: "Thursday", hours: "09:00 AM – 11:00 PM" },
-    { day: "Friday", hours: "09:00 AM – 11:00 PM" },
-    { day: "Saturday", hours: "10:00 AM – 11:00 PM" },
-    { day: "Sunday", hours: "10:00 AM – 09:00 PM" },
+    { day: "Monday", hours: "12:00 AM – 11:59 PM" },
+    { day: "Tuesday", hours: "12:00 AM – 11:59 PM" },
+    { day: "Wednesday", hours: "12:00 AM – 11:59 PM" },
+    { day: "Thursday", hours: "12:00 AM – 11:59 PM" },
+    { day: "Friday", hours: "12:00 AM – 11:59 PM" },
+    { day: "Saturday", hours: "12:00 AM – 11:59 PM" },
+    { day: "Sunday", hours: "12:00 AM – 11:59 PM" },
   ],
 
   /* ── Social Links ──────────────────────────────────────── */
   socials: {
-    facebook: "https://facebook.com/tastyc",
-    instagram: "https://instagram.com/tastyc",
-    twitter: "https://x.com/tastyc",
-    youtube: "https://youtube.com/@tastyc",
+    facebook: "",
+    instagram: "",
+    twitter: "",
+    youtube: "",
   },
 
   /* ── Footer ────────────────────────────────────────────── */
   footer: {
     aboutText:
-      "We are a passionate team of chefs and food enthusiasts dedicated to bringing you the finest dining experience. Every dish is crafted with love, using locally sourced and organic ingredients.",
-    copyright: "© 2026 Tastyc. All rights reserved.",
+      "HN Foods serves authentic Pakistani flavors in a comfortable, family-friendly space in Islamabad. From BBQ and karahi to breakfast platters and rice dishes, every meal is prepared with care and traditional taste.",
+    copyright: "© 2026 HN Foods. All rights reserved.",
   },
 
   /* ── Newsletter ────────────────────────────────────────── */
   newsletter: {
-    heading: "SUBSCRIBE OUR NEWSLETTER",
-    subtext: "Get the latest updates on new menu items, special offers, and exclusive events delivered straight to your inbox.",
+    heading: "STAY UPDATED",
+    subtext: "Get the latest updates on new dishes, special offers, and events from HN Foods.",
     buttonText: "Subscribe",
     successMessage: "Thank you for subscribing! 🎉",
   },
@@ -117,6 +117,16 @@ const siteConfig = {
    *  PAGE SPECIFIC DATA & IMAGES
    * ═══════════════════════════════════════════════════════════ */
   pages: {
+    /* ── Home Page ─────────────────────────────────────────── */
+    home: {
+      hero: {
+        backgroundImage: "https://kommodo.ai/i/k2CbPGX6YC4BIoVU35vA",
+        label: "Welcome to HN Foods",
+        heading: "Authentic Pakistani Taste",
+        text: "Enjoy BBQ, karahi, breakfast, seafood, rice, and desi favorites in a warm family-friendly setting in Islamabad.",
+      },
+    },
+
     /* ── About Us Page ─────────────────────────────────────── */
     about: {
       hero: {
@@ -125,10 +135,10 @@ const siteConfig = {
       },
       story: {
         tag: "Our Story",
-        heading: "Crafting Memorable Dining Experiences Since 2010",
+        heading: "Authentic Taste, Warm Hospitality",
         paragraphs: [
-          "At {name}, we believe every meal should tell a story. Our chefs blend time-honoured traditions with bold creativity, sourcing only the freshest local ingredients to craft dishes that delight the senses and warm the soul.",
-          "From our cosy interiors to our curated menu, every detail is designed to make you feel at home — while taking your taste buds on an unforgettable journey.",
+          "At HN Foods, we focus on authentic Pakistani food prepared with care and served in a comfortable dining environment.",
+          "Located in F-6 Markaz, Islamabad, the restaurant is known for its BBQ, desi dishes, karahi, handi, breakfast items, rice, and seafood options.",
         ],
         image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=450&fit=crop",
         imageAlt: "Restaurant ambiance",
@@ -141,18 +151,18 @@ const siteConfig = {
         items: [
           {
             icon: "star",
-            title: "Premium Quality",
-            text: "Locally sourced, organic ingredients prepared by award-winning chefs.",
+            title: "Authentic Taste",
+            text: "Traditional Pakistani flavors made with care and attention to detail.",
           },
           {
             icon: "heart",
-            title: "Made with Love",
-            text: "Every dish is handcrafted with passion and attention to detail.",
+            title: "Wide Variety",
+            text: "BBQ, karahi, breakfast, rice, seafood, and more under one roof.",
           },
           {
             icon: "people",
-            title: "Warm Hospitality",
-            text: "A welcoming atmosphere where every guest is treated like family.",
+            title: "Family Friendly",
+            text: "A comfortable dining space for families, friends, and gatherings.",
           },
         ],
       },
@@ -168,12 +178,12 @@ const siteConfig = {
       dishes: {
         label: "Our Dishes",
         headingAll: "All Dishes",
-        subtext: "Explore our delicious selection crafted with the freshest ingredients by our talented chefs.",
+        subtext: "Explore HN Foods' selection of authentic Pakistani, BBQ, karahi, breakfast, seafood, and rice dishes.",
       },
       cta: {
         backgroundImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1400&h=500&fit=crop",
-        heading: "THIS EVENING\nWILL BE GREAT!",
-        text: "Reserve your table today and enjoy an unforgettable dining experience with family and friends.",
+        heading: "YOUR TABLE\nIS READY!",
+        text: "Reserve your table today and enjoy authentic Pakistani flavors with family and friends.",
         reservedImage: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&h=350&fit=crop",
         reservedImageAlt: "Reserved table",
         reservedLabel: "RESERVED",
@@ -184,14 +194,14 @@ const siteConfig = {
       },
       specials: {
         label: "Chef's Pick",
-        heading: "Special Proposals Menu",
-        subtext: "Handpicked dishes from our chef — the best of what we offer this season.",
+        heading: "Signature Favorites",
+        subtext: "Handpicked dishes from HN Foods — the best of our BBQ, karahi, breakfast, and rice offerings.",
       },
       hours: {
         backgroundImage: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1400&h=500&fit=crop",
         label: "Reservation",
         heading: "WORKING HOURS",
-        text: "Visit us during our opening hours and enjoy a warm, welcoming atmosphere.",
+        text: "Open every day for lunch, dinner, and late-night dining.",
       },
     },
 
@@ -201,7 +211,7 @@ const siteConfig = {
         backgroundImage: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=1400&h=600&fit=crop",
         label: "Online Store",
         heading: "SHOP",
-        text: "Discover exclusive deals and discounts on our finest dishes",
+        text: "Discover menu highlights and special combos from HN Foods.",
       },
       toolbar: {
         title: "SHOP",
@@ -213,7 +223,7 @@ const siteConfig = {
         { value: "price-desc", label: "Price: High to Low" },
         { value: "name-asc", label: "Name: A–Z" },
       ],
-      tags: ["Deals", "Discounts", "Seafood", "Fish", "Fresh", "Special"],
+      tags: ["BBQ", "Karahi", "Breakfast", "Seafood", "Rice", "Deals"],
       emptyMessage: "No products found. Try a different search or category.",
     },
 
@@ -313,7 +323,7 @@ const siteConfig = {
       info: {
         label: "GET IN TOUCH",
         heading: "Contact Information",
-        subtext: "We're always eager to hear from you. Reach out by any of the methods below and we'll get back to you as soon as possible.",
+        subtext: "Reach out to HN Foods for reservations, orders, or general inquiries.",
       },
       form: {
         label: "CONTACT FORM",
