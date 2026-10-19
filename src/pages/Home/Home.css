@@ -278,6 +278,9 @@
   grid-template-columns: 1fr 1fr 1fr 1.5fr;
   gap: 20px;
   align-items: flex-end;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .booking-bar__field {
