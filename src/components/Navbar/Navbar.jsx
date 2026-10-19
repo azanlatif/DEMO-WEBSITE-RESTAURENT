@@ -1,33 +1,29 @@
 /**
  * ============================================================
  *  NAVBAR COMPONENT
- *  Sticky, dark navbar with:
- *  - Logo from siteConfig
- *  - Desktop links
- *  - Reservation button (opens WhatsApp)
- *  - Cart button with badge (opens Cart Drawer)
- *  - Mobile hamburger slide-in menu
+ *  Sticky, glassmorphic resort navigation with:
+ *  - Wadi-e-Jannat Villas branding
+ *  - Desktop links (Home, The Villa, Gallery, Pricing, Contact)
+ *  - Direct WhatsApp booking button
+ *  - Mobile drawer
  * ============================================================
  */
 import { useState, useEffect, useCallback } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import siteConfig from "../../config/siteConfig";
-import { useCart } from "../../context/CartContext";
 import { openWhatsApp } from "../../utils/whatsapp";
 import "./Navbar.css";
 
 export default function Navbar() {
-  const { cartCount, openCart } = useCart();
   const location = useLocation();
 
   /* ── State ──────────────────────────────────────────────── */
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [expandedMobile, setExpandedMobile] = useState(null);
 
   /* ── Scroll listener for transparent→solid transition ──── */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -37,30 +33,23 @@ export default function Navbar() {
   if (prevPathname !== location.pathname) {
     setPrevPathname(location.pathname);
     setMobileOpen(false);
-    setExpandedMobile(null);
   }
 
   /* ── Lock body scroll when mobile menu is open ─────────── */
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   const toggleMobile = useCallback(() => setMobileOpen((v) => !v), []);
-  const toggleMobileSection = useCallback(
-    (label) => setExpandedMobile((prev) => (prev === label ? null : label)),
-    []
-  );
 
-  /* ── Determine if a path is currently active ───────────── */
-  const isActive = (path) => {
-    if (path === "/") return location.pathname === "/";
-    return location.pathname.startsWith(path);
-  };
-
-  const handleReservationClick = (e) => {
+  const handleBookingClick = (e) => {
     e.preventDefault();
-    openWhatsApp(`Hello! I would like to book a table reservation at ${siteConfig.name}.`);
+    openWhatsApp(
+      `Hello! I would like to book a stay at ${siteConfig.name} in Sālkhala.`
+    );
   };
 
   return (
@@ -71,84 +60,76 @@ export default function Navbar() {
         aria-label="Main navigation"
       >
         <div className="navbar__container">
-          {/* ── Logo ────────────────────────────────────── */}
+          {/* ── Brand Logo ──────────────────────────────── */}
           <Link to="/" className="navbar__logo" aria-label={`${siteConfig.name} home`}>
-            {siteConfig.logo ? (
-              <img src={siteConfig.logo} alt={siteConfig.logoAlt} />
-            ) : (
-              <>
-                <span className="navbar__logo-accent">{siteConfig.name.charAt(0)}</span>
-                {siteConfig.name.slice(1)}
-              </>
-            )}
+            <div className="navbar__logo-badge">W</div>
+            <div className="navbar__logo-text">
+              <span className="navbar__logo-title">Wadi-e-Jannat</span>
+              <span className="navbar__logo-sub">VILLAS · SĀLHKALA</span>
+            </div>
           </Link>
 
           {/* ── Desktop Links ───────────────────────────── */}
           <ul className="navbar__links">
-            {siteConfig.navLinks.map((item) => (
-              <li key={item.label} className="navbar__item">
-                {item.children ? (
-                  /* Link with dropdown */
-                  <>
-                    <button
-                      className={`navbar__link ${isActive(item.path) ? "navbar__link--active" : ""}`}
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      tabIndex={0}
-                    >
-                      {item.label}
-                      <span className="navbar__chevron" aria-hidden="true">▼</span>
-                    </button>
-                    <div className="navbar__dropdown" role="menu">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.label}
-                          to={child.path}
-                          className="navbar__dropdown-link"
-                          role="menuitem"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </>
-                ) : (
-                  /* Simple link */
-                  <NavLink
-                    to={item.path}
-                    className={({ isActive: active }) =>
-                      `navbar__link ${active ? "navbar__link--active" : ""}`
-                    }
-                    end={item.path === "/"}
-                  >
-                    {item.label}
-                  </NavLink>
-                )}
-              </li>
-            ))}
+            <li className="navbar__item">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `navbar__link ${isActive ? "navbar__link--active" : ""}`
+                }
+                end
+              >
+                Home
+              </NavLink>
+            </li>
+            <li className="navbar__item">
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `navbar__link ${isActive ? "navbar__link--active" : ""}`
+                }
+              >
+                About The Villa
+              </NavLink>
+            </li>
+            <li className="navbar__item">
+              <NavLink
+                to="/gallery"
+                className={({ isActive }) =>
+                  `navbar__link ${isActive ? "navbar__link--active" : ""}`
+                }
+              >
+                Gallery
+              </NavLink>
+            </li>
+            <li className="navbar__item">
+              <a href="/#pricing" className="navbar__link">
+                Rates & Pricing
+              </a>
+            </li>
+            <li className="navbar__item">
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  `navbar__link ${isActive ? "navbar__link--active" : ""}`
+                }
+              >
+                Contact
+              </NavLink>
+            </li>
           </ul>
 
-          {/* ── Actions (Reservation + Cart + Hamburger) ── */}
+          {/* ── Actions (WhatsApp CTA + Mobile Toggle) ── */}
           <div className="navbar__actions">
-            <button onClick={handleReservationClick} className="navbar__reservation-btn">
-              Reservation
-            </button>
-
-            {/* Cart icon (Opens Cart Drawer) */}
             <button
-              onClick={openCart}
-              className="navbar__cart"
-              aria-label={`Cart: ${cartCount} items`}
-              style={{ background: "none", border: "none", cursor: "pointer" }}
+              onClick={handleBookingClick}
+              className="navbar__booking-btn"
+              aria-label="Book on WhatsApp"
             >
-              <svg className="navbar__cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="9" cy="21" r="1" />
-                <circle cx="20" cy="21" r="1" />
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              <svg viewBox="0 0 24 24" className="navbar__whatsapp-icon">
+                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z" />
               </svg>
-              {cartCount > 0 && (
-                <span className="navbar__cart-badge">{cartCount}</span>
-              )}
+              <span>Book via WhatsApp</span>
             </button>
 
             {/* Hamburger toggle (mobile only) */}
@@ -169,7 +150,7 @@ export default function Navbar() {
       {/* ── Mobile Backdrop ─────────────────────────────── */}
       {mobileOpen && (
         <div
-          className={`navbar__backdrop ${mobileOpen ? "navbar__backdrop--visible" : ""}`}
+          className="navbar__backdrop navbar__backdrop--visible"
           onClick={toggleMobile}
           aria-hidden="true"
         />
@@ -180,51 +161,41 @@ export default function Navbar() {
         className={`navbar__mobile-menu ${mobileOpen ? "navbar__mobile-menu--open" : ""}`}
         aria-hidden={!mobileOpen}
       >
-        {siteConfig.navLinks.map((item) => (
-          <div key={item.label} className="navbar__mobile-item">
-            {item.children ? (
-              <>
-                <button
-                  className={`navbar__mobile-link ${isActive(item.path) ? "navbar__mobile-link--active" : ""}`}
-                  onClick={() => toggleMobileSection(item.label)}
-                  aria-expanded={expandedMobile === item.label}
-                >
-                  {item.label}
-                  <span
-                    className={`navbar__mobile-chevron ${expandedMobile === item.label ? "navbar__mobile-chevron--open" : ""}`}
-                    aria-hidden="true"
-                  >
-                    ▼
-                  </span>
-                </button>
-                <div
-                  className={`navbar__mobile-subnav ${expandedMobile === item.label ? "navbar__mobile-subnav--open" : ""}`}
-                >
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.label}
-                      to={child.path}
-                      className="navbar__mobile-sublink"
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <Link
-                to={item.path}
-                className={`navbar__mobile-link ${isActive(item.path) ? "navbar__mobile-link--active" : ""}`}
-              >
-                {item.label}
-              </Link>
-            )}
+        <div className="navbar__mobile-header">
+          <div className="navbar__logo-badge">W</div>
+          <div className="navbar__logo-text">
+            <span className="navbar__logo-title">Wadi-e-Jannat</span>
+            <span className="navbar__logo-sub">VILLAS · SĀLHKALA</span>
           </div>
-        ))}
+        </div>
 
-        <button onClick={handleReservationClick} className="navbar__mobile-reservation">
-          Reservation
-        </button>
+        <div className="navbar__mobile-links">
+          <Link to="/" className="navbar__mobile-link">
+            Home
+          </Link>
+          <Link to="/about" className="navbar__mobile-link">
+            About The Villa
+          </Link>
+          <Link to="/gallery" className="navbar__mobile-link">
+            Photo Gallery
+          </Link>
+          <a href="/#pricing" className="navbar__mobile-link" onClick={() => setMobileOpen(false)}>
+            Rates & Pricing
+          </a>
+          <Link to="/contact" className="navbar__mobile-link">
+            Contact & Location
+          </Link>
+        </div>
+
+        <div className="navbar__mobile-footer">
+          <p className="navbar__mobile-phone">📞 {siteConfig.contact.phone}</p>
+          <button onClick={handleBookingClick} className="btn btn-whatsapp navbar__mobile-btn">
+            <svg viewBox="0 0 24 24" style={{ width: 20, height: 20, fill: "currentColor" }}>
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z" />
+            </svg>
+            Book via WhatsApp
+          </button>
+        </div>
       </div>
     </>
   );

@@ -1,289 +1,247 @@
 /**
  * ============================================================
- *  CONTACT PAGE — Full contact page matching the Tastyc design.
- *
- *  Sections:
- *  1. Dark hero banner with map background + "CONTACT" heading
- *  2. Contact Information (3 cards: Write Us, Call Us, Visit Us)
- *  3. Contact Form (First/Last Name, Phone, Email, Message)
- *
- *  All data from siteConfig.js
+ *  CONTACT & BOOKING INQUIRY PAGE
+ *  Wadi-e-Jannat Villas (Sālkhala)
+ *  Direct phone & WhatsApp: +92 355 7771140
  * ============================================================
  */
 import { useState, useCallback } from "react";
-import { Link } from "react-router-dom";
 import siteConfig from "../../config/siteConfig";
-import { openWhatsApp } from "../../utils/whatsapp";
+import { openWhatsApp, bookStayWhatsApp } from "../../utils/whatsapp";
 import "./Contact.css";
 
-/** Simple email regex */
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 export default function Contact() {
-  const { contact } = siteConfig;
-  const { contact: contactPage } = siteConfig.pages;
+  const { contact, specifications } = siteConfig;
 
-  /* ── Form state ────────────────────────────────────────── */
   const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     phone: "",
-    email: "",
-    message: "",
+    checkIn: "",
+    checkOut: "",
+    guests: "2 Guests",
+    notes: "",
   });
-  const [errors, setErrors] = useState({});
+
   const [submitted, setSubmitted] = useState(false);
 
-  /** Update a field */
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => {
-      if (prev[name]) {
-        const next = { ...prev };
-        delete next[name];
-        return next;
-      }
-      return prev;
-    });
   }, []);
 
-  /** Validate & submit */
-  const handleSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
-      const errs = {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    bookStayWhatsApp({
+      name: form.name,
+      checkIn: form.checkIn,
+      checkOut: form.checkOut,
+      guests: form.guests,
+      note: form.notes,
+    });
+    setSubmitted(true);
+  };
 
-      if (!form.firstName.trim()) errs.firstName = "First name is required.";
-      if (!form.lastName.trim()) errs.lastName = "Last name is required.";
-      if (!form.email.trim()) errs.email = "Email is required.";
-      else if (!EMAIL_RE.test(form.email.trim())) errs.email = "Enter a valid email.";
-      if (!form.message.trim()) errs.message = "Message is required.";
-
-      if (Object.keys(errs).length) {
-        setErrors(errs);
-        return;
-      }
-
-      setSubmitted(true);
-
-      let text = `📩 *NEW CONTACT MESSAGE*\n`;
-      text += `-------------------------------\n`;
-      text += `*Name:* ${form.firstName} ${form.lastName}\n`;
-      text += `*Email:* ${form.email}\n`;
-      if (form.phone) text += `*Phone:* ${form.phone}\n`;
-      text += `*Message:* ${form.message}\n`;
-
-      openWhatsApp(text);
-      setForm({ firstName: "", lastName: "", phone: "", email: "", message: "" });
-    },
-    [form]
-  );
+  const handleDirectWhatsApp = () => {
+    openWhatsApp(
+      `Hello! I would like to inquire about booking a stay at ${siteConfig.name} in Sālkhala.`
+    );
+  };
 
   return (
-    <>
-      {/* ═══════════════════════════════════════════════════ */}
-      {/* 1. HERO BANNER                                     */}
-      {/* ═══════════════════════════════════════════════════ */}
-      <section className="contact-banner">
-        <div
-          className="contact-banner__bg"
-          style={{
-            backgroundImage: `url('${contactPage.hero.backgroundImage}')`,
-            filter: "saturate(0) brightness(0.25)",
-          }}
-        />
-        <div className="contact-banner__overlay" />
-
-        <div className="container contact-banner__content">
-          <h1 className="contact-banner__heading">{contactPage.hero.heading}</h1>
-          <div className="contact-banner__breadcrumb">
-            <Link to="/">Home</Link>
-            <span className="contact-banner__breadcrumb-sep">/</span>
-            <span>{contact.addressShort || contact.address}</span>
-          </div>
+    <div className="contact-page">
+      {/* ── Hero ────────────────────────────────────────────── */}
+      <section className="contact-hero">
+        <div className="container">
+          <span className="section-label">GET IN TOUCH</span>
+          <h1 className="contact-hero__title">Reservations & Host Concierge</h1>
+          <p className="contact-hero__sub">
+            Directly connect with our management in Sālkhala via WhatsApp or submit a stay inquiry below.
+          </p>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════ */}
-      {/* 2. CONTACT INFORMATION                             */}
-      {/* ═══════════════════════════════════════════════════ */}
-      <section className="contact-info" id="contact-info">
+      {/* ── Main Content ────────────────────────────────────── */}
+      <section className="contact-content">
         <div className="container">
-          <span className="contact-info__accent" aria-hidden="true" />
-          <span className="contact-info__label">{contactPage.info.label}</span>
-          <h2 className="contact-info__heading">{contactPage.info.heading}</h2>
-          <p className="contact-info__subtext">{contactPage.info.subtext}</p>
+          <div className="contact-grid">
+            {/* Contact Details & Quick WhatsApp Card */}
+            <div className="contact-info-col">
+              <div className="contact-card contact-card--highlight">
+                <span className="contact-card__tag">INSTANT RESERVATION</span>
+                <h3 className="contact-card__title">Chat Directly on WhatsApp</h3>
+                <p className="contact-card__desc">
+                  For immediate room availability, custom seasonal pricing, and real-time photos of the
+                  wooden villas in Sālkhala, message our direct host concierge.
+                </p>
 
-          <div className="contact-cards">
-            {/* Write Us */}
-            <div className="contact-card">
-              <div className="contact-card__icon-wrapper">
-                <svg className="contact-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                  <polyline points="22,6 12,13 2,6" />
-                </svg>
-              </div>
-              <h3 className="contact-card__title">Write Us</h3>
-              <div className="contact-card__detail">
-                <a href={`mailto:${contact.email}`} className="contact-card__link">
-                  {contact.email}
-                </a>
-                {contact.emailAlt && (
-                  <a href={`mailto:${contact.emailAlt}`} className="contact-card__link">
-                    {contact.emailAlt}
+                <div className="contact-phone-display">
+                  <span className="contact-phone-label">Direct WhatsApp / Call:</span>
+                  <a
+                    href={`https://wa.me/${contact.whatsappNumber}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-phone-link"
+                  >
+                    {contact.phone}
                   </a>
-                )}
-              </div>
-            </div>
+                </div>
 
-            {/* Call Us */}
-            <div className="contact-card">
-              <div className="contact-card__icon-wrapper">
-                <svg className="contact-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-              </div>
-              <h3 className="contact-card__title">Call Us</h3>
-              <div className="contact-card__detail">
-                <a href={`tel:${contact.phone}`} className="contact-card__link">
-                  {contact.phone}
-                </a>
-                {contact.phoneAlt && (
-                  <a href={`tel:${contact.phoneAlt}`} className="contact-card__link">
-                    {contact.phoneAlt}
-                  </a>
-                )}
-              </div>
-            </div>
-
-            {/* Visit Us */}
-            <div className="contact-card">
-              <div className="contact-card__icon-wrapper">
-                <svg className="contact-card__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-              </div>
-              <h3 className="contact-card__title">Visit Us</h3>
-              <div className="contact-card__detail">
-                <a
-                  href={contact.mapUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="contact-card__link"
+                <button
+                  type="button"
+                  onClick={handleDirectWhatsApp}
+                  className="btn btn-whatsapp contact-card__btn"
                 >
-                  {contact.address}
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════ */}
-      {/* 3. CONTACT FORM                                    */}
-      {/* ═══════════════════════════════════════════════════ */}
-      <section className="contact-form-section" id="contact-form">
-        <div className="container">
-          <hr className="contact-form-section__divider" />
-          <span className="contact-form-section__label">{contactPage.form.label}</span>
-          <h2 className="contact-form-section__heading">{contactPage.form.heading}</h2>
-          <p className="contact-form-section__subtext">{contactPage.form.subtext}</p>
-
-          {submitted ? (
-            <div className="contact-form__success">
-              {contactPage.form.successMessage}
-            </div>
-          ) : (
-            <form className="contact-form" onSubmit={handleSubmit} noValidate>
-              <div className="contact-form__row">
-                <div className="contact-form__group">
-                  <input
-                    type="text"
-                    name="firstName"
-                    className="contact-form__input"
-                    placeholder="First Name"
-                    value={form.firstName}
-                    onChange={handleChange}
-                    aria-label="First Name"
-                    id="contact-first-name"
-                  />
-                  {errors.firstName && (
-                    <span className="contact-form__field-error">{errors.firstName}</span>
-                  )}
-                </div>
-                <div className="contact-form__group">
-                  <input
-                    type="text"
-                    name="lastName"
-                    className="contact-form__input"
-                    placeholder="Last Name"
-                    value={form.lastName}
-                    onChange={handleChange}
-                    aria-label="Last Name"
-                    id="contact-last-name"
-                  />
-                  {errors.lastName && (
-                    <span className="contact-form__field-error">{errors.lastName}</span>
-                  )}
-                </div>
-              </div>
-
-              <div className="contact-form__row">
-                <div className="contact-form__group">
-                  <input
-                    type="tel"
-                    name="phone"
-                    className="contact-form__input"
-                    placeholder="Phone"
-                    value={form.phone}
-                    onChange={handleChange}
-                    aria-label="Phone number"
-                    id="contact-phone"
-                  />
-                </div>
-                <div className="contact-form__group">
-                  <input
-                    type="email"
-                    name="email"
-                    className="contact-form__input"
-                    placeholder="Email"
-                    value={form.email}
-                    onChange={handleChange}
-                    aria-label="Email address"
-                    id="contact-email"
-                  />
-                  {errors.email && (
-                    <span className="contact-form__field-error">{errors.email}</span>
-                  )}
-                </div>
-              </div>
-
-              <div className="contact-form__group contact-form__group--full">
-                <textarea
-                  name="message"
-                  className="contact-form__textarea"
-                  placeholder="Message"
-                  value={form.message}
-                  onChange={handleChange}
-                  aria-label="Your message"
-                  id="contact-message"
-                />
-                {errors.message && (
-                  <span className="contact-form__field-error">{errors.message}</span>
-                )}
-              </div>
-
-              <div className="contact-form__submit-wrapper">
-                <button type="submit" className="contact-form__submit">
-                  {contactPage.form.submitText}
+                  <svg viewBox="0 0 24 24" style={{ width: 20, height: 20, fill: "currentColor" }}>
+                    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z" />
+                  </svg>
+                  Open WhatsApp Chat
                 </button>
               </div>
-            </form>
-          )}
+
+              {/* Location & Villa Specs Card */}
+              <div className="contact-card">
+                <h3 className="contact-card__heading">Property Location</h3>
+                <p className="contact-card__address">
+                  <strong>Wadi-e-Jannat Villas</strong>
+                  <br />
+                  {contact.address}
+                </p>
+
+                <div className="contact-specs-list">
+                  <div className="contact-spec-row">
+                    <span>Capacity:</span>
+                    <strong>{specifications.guests} (Max listed)</strong>
+                  </div>
+                  <div className="contact-spec-row">
+                    <span>Bedrooms & Beds:</span>
+                    <strong>{specifications.bedrooms} ({specifications.beds})</strong>
+                  </div>
+                  <div className="contact-spec-row">
+                    <span>Bathroom:</span>
+                    <strong>{specifications.bathrooms} (Private bath & shower)</strong>
+                  </div>
+                  <div className="contact-spec-row">
+                    <span>Check-in / Check-out:</span>
+                    <strong>{contact.checkInTime} / {contact.checkOutTime}</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Reservation Inquiry Form */}
+            <div className="contact-form-col">
+              <div className="contact-form-box">
+                <span className="section-label">STAY INQUIRY</span>
+                <h2 className="contact-form-title">Plan Your Stay in Sālkhala</h2>
+                <p className="contact-form-desc">
+                  Fill in your preferred travel dates. Clicking submit will automatically draft a
+                  WhatsApp message directly to our host with all your booking details.
+                </p>
+
+                {submitted && (
+                  <div className="contact-success-alert">
+                    <span className="contact-success-icon">✓</span>
+                    <div>
+                      <strong>Inquiry Ready!</strong>
+                      <p>
+                        Your WhatsApp has been opened with the booking request details. Our host will
+                        confirm availability with you shortly.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="contact-form">
+                  <div className="form-group">
+                    <label htmlFor="guest-name">Full Name *</label>
+                    <input
+                      type="text"
+                      id="guest-name"
+                      name="name"
+                      required
+                      placeholder="e.g. Tariq Khan"
+                      value={form.name}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="guest-phone">Contact Phone / WhatsApp Number *</label>
+                    <input
+                      type="tel"
+                      id="guest-phone"
+                      name="phone"
+                      required
+                      placeholder="e.g. +92 300 1234567"
+                      value={form.phone}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="form-row-2">
+                    <div className="form-group">
+                      <label htmlFor="check-in">Check-in Date *</label>
+                      <input
+                        type="date"
+                        id="check-in"
+                        name="checkIn"
+                        required
+                        value={form.checkIn}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="check-out">Check-out Date *</label>
+                      <input
+                        type="date"
+                        id="check-out"
+                        name="checkOut"
+                        required
+                        value={form.checkOut}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="guests-count">Number of Guests</label>
+                    <select
+                      id="guests-count"
+                      name="guests"
+                      value={form.guests}
+                      onChange={handleChange}
+                    >
+                      <option value="1 Guest">1 Guest</option>
+                      <option value="2 Guests">2 Guests</option>
+                      <option value="3 Guests">3 Guests</option>
+                      <option value="4 Guests (Maximum)">4 Guests (Maximum)</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="guest-notes">Special Requests or Questions</label>
+                    <textarea
+                      id="guest-notes"
+                      name="notes"
+                      rows={4}
+                      placeholder="e.g. Airport shuttle request, arrival timing, heated pool inquiry..."
+                      value={form.notes}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <button type="submit" className="btn btn-whatsapp contact-submit-btn">
+                    <svg viewBox="0 0 24 24" style={{ width: 18, height: 18, fill: "currentColor" }}>
+                      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z" />
+                    </svg>
+                    Send Booking Inquiry via WhatsApp
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

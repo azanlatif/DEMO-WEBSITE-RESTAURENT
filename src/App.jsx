@@ -1,37 +1,34 @@
 /**
  * ============================================================
- *  APP — Root component with React Router.
- *  Routes: / (Home), /menu, /order, /catering, /contact, /shop, /about
- *  All pages wrapped in Layout (Navbar + Newsletter + Footer).
+ *  APP — Root component with React Router
+ *  Wadi-e-Jannat Villas (Sālkhala)
+ *  Routes:
+ *  - / : Home (Hero Slideshow, Amenities, Gallery, Pricing, Reviews)
+ *  - /about : About The Villa (Specifications & Nature retreat)
+ *  - /gallery : Full Photographic Gallery with Lightbox
+ *  - /contact : Contact & WhatsApp Booking Inquiry
  * ============================================================
  */
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { CartProvider } from "./context/CartContext";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Home from "./pages/Home/Home";
-import Menu from "./pages/Menu/Menu";
-import Order from "./pages/Order/Order";
-import Contact from "./pages/Contact/Contact";
-import Shop from "./pages/Shop/Shop";
 import About from "./pages/About/About";
-import Catering from "./pages/Catering/Catering";
+import Gallery from "./pages/Gallery/Gallery";
+import Contact from "./pages/Contact/Contact";
 
 export default function App() {
   return (
-    <CartProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/order" element={<Order />} />
-            <Route path="/catering" element={<Catering />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/about" element={<About />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </CartProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/contact" element={<Contact />} />
+          {/* Fallback for legacy restaurant paths */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }

@@ -1,7 +1,7 @@
 /**
  * ============================================================
  *  LAYOUT COMPONENT
- *  Wraps every page with: Navbar (top) → Page → Newsletter → Footer
+ *  Wraps every page with: Navbar (top) → Page → Newsletter → Footer → FloatingWhatsApp
  *  Uses <Outlet> from React Router for nested routing.
  * ============================================================
  */
@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import Navbar from "../Navbar/Navbar";
 import Newsletter from "../Newsletter/Newsletter";
 import Footer from "../Footer/Footer";
-import CartModal from "../CartModal/CartModal";
+import FloatingWhatsApp from "../FloatingWhatsApp/FloatingWhatsApp";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -28,7 +28,7 @@ export default function Layout() {
       </main>
       <Newsletter />
       <Footer />
-      <CartModal />
+      <FloatingWhatsApp />
     </>
   );
 }
