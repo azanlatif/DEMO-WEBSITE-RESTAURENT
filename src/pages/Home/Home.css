@@ -264,6 +264,8 @@
   z-index: 20;
   margin-top: -46px;
   padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .booking-bar {
@@ -302,6 +304,7 @@
   color: var(--color-dark);
   font-weight: 500;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .booking-bar__input:focus,
@@ -893,9 +896,16 @@
     min-height: 90vh;
   }
 
+  .booking-bar-wrapper {
+    margin-top: 24px;
+    padding: 0 16px;
+  }
+
   .booking-bar {
     grid-template-columns: 1fr;
     padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .essential-grid {
